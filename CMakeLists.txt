@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(discordpp-plugin-template)
+project(discordpp-plugin-endpoints)
 
 set(CMAKE_CXX_STANDARD 14)
 
