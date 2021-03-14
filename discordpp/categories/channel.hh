@@ -265,3 +265,97 @@ sptr<const json> render_payload() override {
     return std::make_shared<const json>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#crosspost-message
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class CrosspostMessageCall
+#define function crosspostMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Crosspost Message needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Crosspost Message needs a Message ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id) + "/crosspost");
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#create-reaction
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class CreateReactionCall
+#define function createReaction
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Create Reaction needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Create Reaction needs a Message ID");
+    if (!_emoji)
+        throw std::logic_error("Create Reaction needs an emoji");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id) + "/reactions/" +
+        util::url_encode(*_emoji) + "/@me");
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#delete-own-reaction
+// https://discord.com/developers/docs/resources/channel#delete-user-reaction
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteOwnReactionCall
+#define function deleteOwnReaction
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
+    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Delete Own Reaction needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Delete Own Reaction needs a Message ID");
+    if (!_emoji)
+        throw std::logic_error("Delete Own Reaction needs an emoji");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id) + "/reactions/" +
+        util::url_encode(*_emoji) + "/" + (!_user_id ? "@me" : std::to_string(*_user_id)));
+}
+#include <discordpp/macros/defineCallClose.hh>
