@@ -54,16 +54,16 @@ enum ChannelType {
 #define function modifyChannel
 #define Fields                                                                 \
     NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, name, USEDBY(payload, body))                        \
-    NEW_FIELD(int, channel_type, USEDBY(payload, body))                        \
-    NEW_FIELD(int, position, USEDBY(payload, body))                            \
-    NEW_FIELD(std::string, topic, USEDBY(payload, body))                       \
-    NEW_FIELD(bool, nsfw, USEDBY(payload, body))                               \
-    NEW_FIELD(int, rate_limit_per_user, USEDBY(payload, body))                 \
-    NEW_FIELD(int, bitrate, USEDBY(payload, body))                             \
-    NEW_FIELD(int, user_limit, USEDBY(payload, body))                          \
-    NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload, body)) \
-    NEW_FIELD(snowflake, parent_id, USEDBY(payload, body))                     \
+    NEW_FIELD(std::string, name, USEDBY(payload))                              \
+    NEW_FIELD(int, channel_type, USEDBY(payload))                              \
+    NEW_FIELD(int, position, USEDBY(payload))                                  \
+    NEW_FIELD(std::string, topic, USEDBY(payload))                             \
+    NEW_FIELD(bool, nsfw, USEDBY(payload))                                     \
+    NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))                       \
+    NEW_FIELD(int, bitrate, USEDBY(payload))                                   \
+    NEW_FIELD(int, user_limit, USEDBY(payload))                                \
+    NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))       \
+    NEW_FIELD(snowflake, parent_id, USEDBY(payload))                           \
     HIDE_FIELD(json, payload)                                                  \
     STATIC_FIELD(std::string, method, "PATCH")                                 \
     HIDE_FIELD(std::string, target)                                            \
@@ -146,10 +146,10 @@ sptr<const std::string> render_target() override {
 #define function getChannelMessages
 #define Fields                                                                 \
     NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, around, USEDBY(payload, body))                        \
-    NEW_FIELD(snowflake, before, USEDBY(payload, body))                        \
-    NEW_FIELD(snowflake, after, USEDBY(payload, body))                         \
-    NEW_FIELD(int, limit, USEDBY(payload, body))                               \
+    NEW_FIELD(snowflake, around, USEDBY(payload))                              \
+    NEW_FIELD(snowflake, before, USEDBY(payload))                              \
+    NEW_FIELD(snowflake, after, USEDBY(payload))                               \
+    NEW_FIELD(int, limit, USEDBY(payload))                                     \
     HIDE_FIELD(json, payload)                                                  \
     STATIC_FIELD(std::string, method, "GET")                                   \
     HIDE_FIELD(std::string, target)                                            \
@@ -219,12 +219,12 @@ sptr<const std::string> render_target() override {
 #define function createMessage
 #define Fields                                                                 \
     NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, content, USEDBY(payload, body))                     \
-    NEW_FIELD(Nonce, nonce, USEDBY(payload, body))                             \
-    NEW_FIELD(bool, tts, USEDBY(payload, body))                                \
-    NEW_FIELD(json, embed, USEDBY(payload, body))                              \
-    NEW_FIELD(json, allowed_mentions, USEDBY(payload, body))                   \
-    NEW_FIELD(json, message_reference, USEDBY(payload, body))                  \
+    NEW_FIELD(std::string, content, USEDBY(payload))                           \
+    NEW_FIELD(Nonce, nonce, USEDBY(payload))                                   \
+    NEW_FIELD(bool, tts, USEDBY(payload))                                      \
+    NEW_FIELD(json, embed, USEDBY(payload))                                    \
+    NEW_FIELD(json, allowed_mentions, USEDBY(payload))                         \
+    NEW_FIELD(json, message_reference, USEDBY(payload))                        \
     FORWARD_FIELD(std::string, filename, )                                     \
     FORWARD_FIELD(std::string, filetype, )                                     \
     FORWARD_FIELD(std::string, file, )                                         \
