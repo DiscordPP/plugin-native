@@ -356,6 +356,88 @@ sptr<const std::string> render_target() override {
     return std::make_shared<const std::string>(
         "/channels/" + std::to_string(*_channel_id) + "/messages/" +
         std::to_string(*_message_id) + "/reactions/" +
-        util::url_encode(*_emoji) + "/" + (!_user_id ? "@me" : std::to_string(*_user_id)));
+        util::url_encode(*_emoji) + "/" +
+        (!_user_id ? "@me" : std::to_string(*_user_id)));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#get-reactions
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class GetReactionsCall
+#define function getReactions
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
+    NEW_FIELD(snowflake, before, USEDBY(payload))                              \
+    NEW_FIELD(snowflake, after, USEDBY(payload))                               \
+    NEW_FIELD(int, limit, USEDBY(payload))                                     \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Get Reactions needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Get Reactions needs a Message ID");
+    if (!_emoji)
+        throw std::logic_error("Get Reactions needs an emoji");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id) + "/reactions/" +
+        util::url_encode(*_emoji));
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (_before)
+        out["before"] = *_before;
+
+    if (_after)
+        out["after"] = *_after;
+
+    if (_limit)
+        out["limit"] = *_limit;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#delete-all-reactions
+// https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteAllReactionsCall
+#define function deleteAllReactions
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Get Reactions needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Get Reactions needs a Message ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id) + "/reactions" +
+        (_emoji ? "/" + util::url_encode(*_emoji) : ""));
 }
 #include <discordpp/macros/defineCallClose.hh>
