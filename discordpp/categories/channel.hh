@@ -441,3 +441,481 @@ sptr<const std::string> render_target() override {
         (_emoji ? "/" + util::url_encode(*_emoji) : ""));
 }
 #include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#edit-message
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class EditMessageCall
+#define function editMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, content, USEDBY(payload))                           \
+    NEW_FIELD(json, embed, USEDBY(payload))                                    \
+    NEW_FIELD(int, flags, USEDBY(payload))                                     \
+    NEW_FIELD(json, allowed_mentions, USEDBY(payload))                         \
+    STATIC_FIELD(std::string, method, "PATCH")                                 \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Edit Message needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Edit Message needs a Message ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id));
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (_content)
+        out["content"] = *_content;
+
+    if (_embed)
+        out["embed"] = *_embed;
+
+    if (_flags)
+        out["flags"] = *_flags;
+
+    if (_allowed_mentions)
+        out["allowed_mentions"] = *_allowed_mentions;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#delete-message
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteMessageCall
+#define function deleteMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Delete Message needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Delete Message needs a Message ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
+        std::to_string(*_message_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#bulk-delete-messages
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class BulkDeleteMessagesCall
+#define function bulkDeleteMessages
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(std::vector<snowflake>, messages, USEDBY(payload))               \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Bulk Delete Messages needs a Channel ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/messages/bulk-delete");
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (!_messages)
+        throw std::logic_error(
+            "Bulk Delete Messages needs an array of messages");
+    out["messages"] = *_messages;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#edit-channel-permissions
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class EditChannelPermissionsCall
+#define function editChannelPermissions
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, overwrite_id, USEDBY(target))                         \
+    NEW_FIELD(std::string, allow, USEDBY(payload))                             \
+    NEW_FIELD(std::string, deny, USEDBY(payload))                              \
+    NEW_FIELD(int, permission_type, USEDBY(payload))                           \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Edit Channel Permissions needs a Channel ID");
+    if (!_overwrite_id)
+        throw std::logic_error(
+            "Edit Channel Permissions needs an Overwrite ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/permissions/" +
+        std::to_string(*_overwrite_id));
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (_allow)
+        out["allow"] = *_allow;
+
+    if (_deny)
+        out["deny"] = *_deny;
+
+    if (_permission_type)
+        out["type"] = *_permission_type;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#get-channel-invites
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetChannelInvitesCall
+#define function getChannelInvites
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Get Channel Invites needs an ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/invites");
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#create-channel-invite
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class CreateChannelInviteCall
+#define function createChannelInvite
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(int, max_age, USEDBY(payload))                                   \
+    NEW_FIELD(int, max_uses, USEDBY(payload))                                  \
+    NEW_FIELD(bool, temporary, USEDBY(payload))                                \
+    NEW_FIELD(bool, unique, USEDBY(payload))                                   \
+    NEW_FIELD(std::string, target_user, USEDBY(payload))                       \
+    NEW_FIELD(int, target_user_type, USEDBY(payload))                          \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Create Channel Invite needs a Channel ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/invites");
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (_max_age)
+        out["max_age"] = *_max_age;
+
+    if (_max_uses)
+        out["max_uses"] = *_max_uses;
+
+    if (_temporary)
+        out["temporary"] = *_temporary;
+
+    if (_unique)
+        out["unique"] = *_unique;
+
+    if (_target_user)
+        out["target_user"] = *_target_user;
+
+    if (_target_user_type)
+        out["target_user_type"] = *_target_user_type;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#delete-channel-permission
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteChannelPermissionCall
+#define function deleteChannelPermissions
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, overwrite_id, USEDBY(target))                         \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Delete Channel Permission needs a Channel ID");
+    if (!_overwrite_id)
+        throw std::logic_error(
+            "Delete Channel Permission needs an Overwrite ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/permissions/" +
+        std::to_string(*_overwrite_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#follow-news-channel
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class FollowNewsChannelCall
+#define function followNewsChannel
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, webhook_channel_id, USEDBY(payload))                  \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Follow News Channel needs a Channel ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/followers");
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (!_webhook_channel_id)
+        throw std::logic_error(
+            "Follow News Channel needs an Webhook Channel ID");
+    out["webhook_channel_id"] = *_webhook_channel_id;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class TriggerTypingIndicatorCall
+#define function triggerTypingIndicator
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Trigger Typing Indicator needs a Channel ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/typing");
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#get-pinned-messages
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetPinnedMessagesCall
+#define function getPinnedMessages
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Get Pinned Messages needs a Channel ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/pins");
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#add-pinned-channel-message
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class AddPinnedChannelMessageCall
+#define function addPinnedChannelMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Add Pinned Channel Message needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Add Pinned Channel Message needs a Message ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/pins/" +
+        std::to_string(*_message_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeletePinnedChannelMessageCall
+#define function deletePinnedChannelMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Add Pinned Channel Message needs a Channel ID");
+    if (!_message_id)
+        throw std::logic_error("Add Pinned Channel Message needs a Message ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/pins/" +
+        std::to_string(*_message_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class AddGroupDMRecipientCall
+#define function addGroupDMRecipient
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
+    NEW_FIELD(std::string, access_token, USEDBY(payload))                      \
+    NEW_FIELD(std::string, nick, USEDBY(payload))                              \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(json, payload)                                                  \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Add Group DM Recipient needs a Channel ID");
+    if (!_user_id)
+        throw std::logic_error("Add Group DM Recipient needs a User ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/recipients/" +
+        std::to_string(*_user_id));
+}
+sptr<const json> render_payload() override {
+    json out;
+
+    if (!_access_token)
+        throw std::logic_error("Add Group DM Recipient needs an Access Token");
+    out["access_token"] = *_access_token;
+
+    if (_nick)
+        out["access_token"] = *_nick;
+
+    return std::make_shared<const json>(std::move(out));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class RemoveGroupDMRecipientCall
+#define function removeGroupDMRecipient
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(std::string, target)                                            \
+    HIDE_FIELD(std::string, type)                                              \
+    HIDE_FIELD(std::string, body)                                              \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_channel_id)
+        throw std::logic_error("Add Group DM Recipient needs a Channel ID");
+    if (!_user_id)
+        throw std::logic_error("Add Group DM Recipient needs a User ID");
+    return std::make_shared<const std::string>(
+        "/channels/" + std::to_string(*_channel_id) + "/recipients/" +
+        std::to_string(*_user_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
