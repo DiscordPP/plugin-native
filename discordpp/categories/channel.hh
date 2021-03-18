@@ -7,7 +7,7 @@
 // especially with the volatile nature of a live service like Discord. If
 // something doesn't work come swing by #🔚endpoints on the Discord++ server and
 // someone'll help you out! If the endpoints work fine swing by that same
-// channel with proof for credit and a special role.
+// channel with proof of credit for the @Endpoint Verifier role!
 
 #ifndef ENDPOINT_BREAKOUTS
 #error This header should only be included in plugin-endpoints.hh
