@@ -2,11 +2,19 @@
 // Created by Aidan on 3/11/2021.
 //
 
+// Howdy! This file contains unverified endpoints so they may need touching up.
+// Sorry for the mess, I just don't have the time to verify everything by hand,
+// especially with the volatile nature of a live service like Discord. If
+// something doesn't work come swing by #🔚endpoints on the Discord++ server and
+// someone'll help you out! If the endpoints work fine swing by that same
+// channel with proof for credit and a special role.
+
 #ifndef ENDPOINT_BREAKOUTS
 #error This header should only be included in plugin-endpoints.hh
 #endif
 
 // https://discord.com/developers/docs/resources/channel#get-channel
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelCall
@@ -48,6 +56,7 @@ enum ChannelType {
 };
 
 // https://discord.com/developers/docs/resources/channel#modify-channel
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyChannelCall
@@ -116,6 +125,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#deleteclose-channel
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteChannelCall
@@ -140,6 +150,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#get-channel-messages
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class GetChannelMessagesCall
@@ -185,6 +196,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#get-channel
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelMessageCall
@@ -213,6 +225,9 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#create-message
+// UndarkAido/Aido#8614 verified channel_id, content, filename, filetype, file
+// TODO nonce, tts, embed, allowed_mentions, and message_reference are
+// unverified
 #define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateMessageCall
@@ -267,6 +282,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#crosspost-message
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class CrosspostMessageCall
@@ -295,6 +311,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#create-reaction
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class CreateReactionCall
@@ -328,6 +345,7 @@ sptr<const std::string> render_target() override {
 
 // https://discord.com/developers/docs/resources/channel#delete-own-reaction
 // https://discord.com/developers/docs/resources/channel#delete-user-reaction
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteOwnReactionCall
@@ -362,6 +380,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#get-reactions
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class GetReactionsCall
@@ -413,6 +432,7 @@ sptr<const json> render_payload() override {
 
 // https://discord.com/developers/docs/resources/channel#delete-all-reactions
 // https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteAllReactionsCall
@@ -443,6 +463,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#edit-message
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditMessageCall
@@ -493,6 +514,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#delete-message
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteMessageCall
@@ -521,6 +543,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#bulk-delete-messages
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class BulkDeleteMessagesCall
@@ -557,6 +580,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#edit-channel-permissions
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditChannelPermissionsCall
@@ -604,6 +628,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#get-channel-invites
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelInvitesCall
@@ -628,6 +653,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#create-channel-invite
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateChannelInviteCall
@@ -682,6 +708,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#delete-channel-permission
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteChannelPermissionCall
@@ -711,6 +738,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#follow-news-channel
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class FollowNewsChannelCall
@@ -746,6 +774,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class TriggerTypingIndicatorCall
@@ -770,6 +799,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#get-pinned-messages
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class GetPinnedMessagesCall
@@ -794,6 +824,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#add-pinned-channel-message
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class AddPinnedChannelMessageCall
@@ -822,6 +853,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeletePinnedChannelMessageCall
@@ -850,6 +882,7 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class AddGroupDMRecipientCall
@@ -893,6 +926,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class RemoveGroupDMRecipientCall
