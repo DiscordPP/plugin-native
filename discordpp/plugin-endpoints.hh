@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iomanip>
+#include <fmt/format.h>
 
 namespace discordpp {
 
