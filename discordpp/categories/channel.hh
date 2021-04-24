@@ -152,16 +152,15 @@ sptr<const std::string> render_target() override {
 // https://discord.com/developers/docs/resources/channel#get-channel-messages
 // TODO unverified
 #define Bot PluginEndpoints
-#define Parent JsonCall
+#define Parent Call
 #define Class GetChannelMessagesCall
 #define function getChannelMessages
 #define Fields                                                                 \
     NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, around, USEDBY(payload))                              \
-    NEW_FIELD(snowflake, before, USEDBY(payload))                              \
-    NEW_FIELD(snowflake, after, USEDBY(payload))                               \
-    NEW_FIELD(int, limit, USEDBY(payload))                                     \
-    HIDE_FIELD(json, payload)                                                  \
+    NEW_FIELD(snowflake, around, USEDBY(target))                               \
+    NEW_FIELD(snowflake, before, USEDBY(target))                               \
+    NEW_FIELD(snowflake, after, USEDBY(target))                                \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
     STATIC_FIELD(std::string, method, "GET")                                   \
     HIDE_FIELD(std::string, target)                                            \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -173,25 +172,26 @@ sptr<const std::string> render_target() override {
     if (!_channel_id) {
         throw std::logic_error("Get Channel Messages needs an ID");
     }
-    return std::make_shared<const std::string>(
-        "/channels/" + std::to_string(*_channel_id) + "/messages");
-}
-sptr<const json> render_payload() override {
-    json out;
-
-    if (_around)
-        out["around"] = *_around;
-
-    if (_before)
-        out["before"] = *_before;
-
-    if (_after)
-        out["after"] = *_after;
-
-    if (_limit)
-        out["limit"] = *_limit;
-
-    return std::make_shared<const json>(std::move(out));
+    std::string out =
+        fmt::format("/channels/{}/messages", std::to_string(*_channel_id));
+    bool first = true;
+    if (_around) {
+        out += fmt::format("{}around={}", first ? "?" : "&", *_around);
+        first = false;
+    }
+    if (_before) {
+        out += fmt::format("{}before={}", first ? "?" : "&", *_before);
+        first = false;
+    }
+    if (_after) {
+        out += fmt::format("{}after={}", first ? "?" : "&", *_after);
+        first = false;
+    }
+    if (_limit) {
+        out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
+        first = false;
+    }
+    return std::make_shared<const std::string>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
 
@@ -382,21 +382,20 @@ sptr<const std::string> render_target() override {
 // https://discord.com/developers/docs/resources/channel#get-reactions
 // TODO unverified
 #define Bot PluginEndpoints
-#define Parent JsonCall
+#define Parent Call
 #define Class GetReactionsCall
 #define function getReactions
 #define Fields                                                                 \
     NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
     NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
     NEW_FIELD(std::string, emoji, USEDBY(target))                              \
-    NEW_FIELD(snowflake, before, USEDBY(payload))                              \
-    NEW_FIELD(snowflake, after, USEDBY(payload))                               \
-    NEW_FIELD(int, limit, USEDBY(payload))                                     \
+    NEW_FIELD(snowflake, before, USEDBY(target))                               \
+    NEW_FIELD(snowflake, after, USEDBY(target))                                \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
     STATIC_FIELD(std::string, method, "GET")                                   \
     HIDE_FIELD(std::string, target)                                            \
     HIDE_FIELD(std::string, type)                                              \
     HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -409,24 +408,19 @@ sptr<const std::string> render_target() override {
         throw std::logic_error("Get Reactions needs a Message ID");
     if (!_emoji)
         throw std::logic_error("Get Reactions needs an emoji");
-    return std::make_shared<const std::string>(
-        "/channels/" + std::to_string(*_channel_id) + "/messages/" +
-        std::to_string(*_message_id) + "/reactions/" +
-        util::url_encode(*_emoji));
-}
-sptr<const json> render_payload() override {
-    json out;
-
-    if (_before)
-        out["before"] = *_before;
-
-    if (_after)
-        out["after"] = *_after;
-
-    if (_limit)
-        out["limit"] = *_limit;
-
-    return std::make_shared<const json>(std::move(out));
+    std::string out = fmt::format(
+        "/channels/{}/messages/{}/reactions/{}", std::to_string(*_channel_id),
+        std::to_string(*_message_id), util::url_encode(*_emoji));
+    bool first = true;
+    if (_after) {
+        out += fmt::format("{}after={}", first ? "?" : "&", *_after);
+        first = false;
+    }
+    if (_limit) {
+        out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
+        first = false;
+    }
+    return std::make_shared<const std::string>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
 
