@@ -22,9 +22,9 @@
 #define Fields                                                                 \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -48,9 +48,9 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     NEW_FIELD(snowflake, emoji_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -79,10 +79,10 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(std::string, image, USEDBY(payload))                             \
     NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))                  \
     STATIC_FIELD(std::string, method, "POST")                                  \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -128,10 +128,10 @@ sptr<const json> render_payload() override {
     NEW_FIELD(std::string, name, USEDBY(payload))                              \
     NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))                  \
     STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -174,9 +174,9 @@ sptr<const json> render_payload() override {
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     NEW_FIELD(snowflake, emoji_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 

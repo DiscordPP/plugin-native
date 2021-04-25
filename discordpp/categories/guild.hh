@@ -34,9 +34,9 @@
     NEW_FIELD(int, system_channel_flags, USEDBY(payload))                      \
     STATIC_FIELD(std::string, method, "POST")                                  \
     STATIC_FIELD(std::string, target, "/users/@me/channels")                   \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -76,9 +76,9 @@ sptr<const json> render_payload() override {
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     NEW_FIELD(bool, with_counts, USEDBY(target))                               \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -88,7 +88,7 @@ sptr<const std::string> render_target() override {
     if (!_guild_id) {
         throw std::logic_error("Get Guild needs a Guild ID");
     }
-    std::string out = fmt::format("/guilds/{}", std::to_string(*_guild_id));
+    std::string out = fmt::format("/guilds/{}", *_guild_id);
     bool first = true;
     if (_with_counts) {
         out += fmt::format("{}with_counts={}", first ? "?" : "&",
@@ -127,10 +127,10 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(std::vector<std::string>, features, USEDBY(payload))             \
     NEW_FIELD(std::string, description, USEDBY(payload))                       \
     STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -138,10 +138,10 @@ sptr<const std::string> render_target() override {
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
-        throw std::logic_error("Get Guild Preview needs a Guild ID");
+        throw std::logic_error("Modify Guild needs a Guild ID");
     }
     return std::make_shared<const std::string>(
-        fmt::format("/guilds/{}/preview", std::to_string(*_guild_id)));
+        fmt::format("/guilds/{}", *_guild_id));
 }
 sptr<const json> render_payload() override {
     if (!_name) {

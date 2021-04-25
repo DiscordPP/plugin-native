@@ -22,8 +22,8 @@
 #define Fields                                                                 \
     STATIC_FIELD(std::string, method, "GET")                                   \
     STATIC_FIELD(std::string, target, "/users/@me")                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -40,9 +40,9 @@
 #define Fields                                                                 \
     NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -67,9 +67,9 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(std::string, avatar, USEDBY(payload))                            \
     STATIC_FIELD(std::string, method, "PATCH")                                 \
     STATIC_FIELD(std::string, target, "/users/@me")                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -101,9 +101,9 @@ sptr<const json> render_payload() override {
     NEW_FIELD(snowflake, after, USEDBY(target))                                \
     NEW_FIELD(int, limit, USEDBY(target))                                      \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -137,9 +137,9 @@ sptr<const std::string> render_target() override {
 #define Fields                                                                 \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(std::string, target)                                            \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -164,9 +164,9 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(snowflake, recipient_id, USEDBY(payload))                        \
     STATIC_FIELD(std::string, method, "POST")                                  \
     STATIC_FIELD(std::string, target, "/users/@me/channels")                   \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -193,9 +193,9 @@ sptr<const json> render_payload() override {
     NEW_FIELD(std::map<snowflake COMMA std::string>, nicks, USEDBY(payload))   \
     STATIC_FIELD(std::string, method, "POST")                                  \
     STATIC_FIELD(std::string, target, "/users/@me/channels")                   \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
-    HIDE_FIELD(json, payload)                                                  \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
@@ -228,8 +228,8 @@ sptr<const json> render_payload() override {
 #define Fields                                                                 \
     STATIC_FIELD(std::string, method, "GET")                                   \
     STATIC_FIELD(std::string, target, "/users/@me/connections")                \
-    HIDE_FIELD(std::string, type)                                              \
-    HIDE_FIELD(std::string, body)                                              \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 
