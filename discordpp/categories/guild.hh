@@ -206,3 +206,225 @@ sptr<const json> render_payload() override {
     return std::make_shared<const json>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#delete-guild
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteGuildCall
+#define function deleteGuild
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Delete Guild needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}", *_guild_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-channels
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildChannelsCall
+#define function getGuildChannels
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Get Guild Channels needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/channels", *_guild_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#create-guild-channels
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class CreateGuildChannelsCall
+#define function createGuildChannels
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(std::string, name, USEDBY(payload))                              \
+    NEW_FIELD(int, type, USEDBY(payload))                                      \
+    NEW_FIELD(std::string, topic, USEDBY(payload))                             \
+    NEW_FIELD(int, bitrate, USEDBY(payload))                                   \
+    NEW_FIELD(int, user_limit, USEDBY(payload))                                \
+    NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))                       \
+    NEW_FIELD(int, position, USEDBY(payload))                                  \
+    NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))       \
+    NEW_FIELD(snowflake, parent_id, USEDBY(payload))                           \
+    NEW_FIELD(bool, nsfw, USEDBY(payload))                                     \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Create Guild Channel needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/channels", *_guild_id));
+}
+sptr<const json> render_payload() override {
+    if (!_name) {
+        throw std::logic_error("Create Guild Channel needs a name");
+    }
+    if (!_type) {
+        throw std::logic_error("Create Guild Channel needs a type");
+    }
+    if (*_type == 2 || *_type == 13) {
+        if (!_bitrate) {
+            throw std::logic_error("Create Guild Channel needs a bitrate");
+        }
+        if (!_user_limit) {
+            throw std::logic_error("Create Guild Channel needs a user limit");
+        }
+    } else {
+        if (!_topic) {
+            throw std::logic_error("Create Guild Channel needs a topic");
+        }
+        if (!_rate_limit_per_user) {
+            throw std::logic_error(
+                "Create Guild Channel needs a rate limit per user");
+        }
+    }
+    if (!_position) {
+        throw std::logic_error("Create Guild Channel needs a position");
+    }
+    if (!_permission_overwrites) {
+        throw std::logic_error(
+            "Create Guild Channel needs a permission overwrites array");
+    }
+    if (!_parent_id) {
+        throw std::logic_error("Create Guild Channel needs a parent id");
+    }
+    if (!_nsfw) {
+        throw std::logic_error(
+            "Create Guild Channel needs a nsfw classification");
+    }
+    json out{{"name", *_name},
+             {"type", *_type},
+             {"position", *_position},
+             {"permission_overwrites", *_permission_overwrites},
+             {"parent_id", std::to_string(*_parent_id)},
+             {"nsfw", *_nsfw}};
+
+    if (*_type == 2 || *_type == 13) {
+        out["bitrate"] = *_bitrate;
+        out["user_limit"] = *_user_limit;
+    } else {
+        out["topic"] = *_topic;
+        out["rate_limit_per_user"] = *_rate_limit_per_user;
+    }
+
+    return std::make_shared<const json>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#create-guild-channels
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyGuildChannelPositionsCall
+#define function modifyGuildChannelPositions
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(snowflake, id, USEDBY(payload))                                  \
+    NEW_FIELD(int, position, USEDBY(payload))                                  \
+    NEW_FIELD(bool, lock_permissions, USEDBY(payload))                         \
+    NEW_FIELD(snowflake, parent_id, USEDBY(payload))                           \
+    STATIC_FIELD(std::string, method, "PATCH")                                 \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Create Guild Channel needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/channels", *_guild_id));
+}
+sptr<const json> render_payload() override {
+    if (!_id) {
+        throw std::logic_error("Create Guild Channel needs a channel id");
+    }
+    json out{{"id", *_id}};
+
+    if (_position) {
+        out["position"] = *_position;
+    }
+    if (_lock_permissions) {
+        out["lock_permissions"] = *_lock_permissions;
+    }
+    if (_parent_id) {
+        out["parent_id"] = std::to_string(*_parent_id);
+    }
+
+    return std::make_shared<const json>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-member
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildMemberCall
+#define function getGuildMember
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Get Guild Member needs a Guild ID");
+    }
+    if (!_user_id) {
+        throw std::logic_error("Get Guild Member needs a User ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/channels/{}", *_guild_id, *_user_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
