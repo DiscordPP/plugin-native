@@ -425,6 +425,43 @@ sptr<const std::string> render_target() override {
         throw std::logic_error("Get Guild Member needs a User ID");
     }
     return std::make_shared<const std::string>(
-        fmt::format("/guilds/{}/channels/{}", *_guild_id, *_user_id));
+        fmt::format("/guilds/{}/members/{}", *_guild_id, *_user_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#list-guild-members
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class ListGuildMembersCall
+#define function listGuildMembers
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
+    NEW_FIELD(snowflake, after, USEDBY(target))                                \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("List Guild Members needs a Guild ID");
+    }
+    std::string out = fmt::format("/guilds/{}/members", *_guild_id, *_user_id);
+    bool first = true;
+    if (_limit) {
+        out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
+        first = false;
+    }
+    if (_after) {
+        out += fmt::format("{}after={}", first ? "?" : "&", *_after);
+        first = false;
+    }
+    return std::make_shared<const std::string>(out);
 }
 #include <discordpp/macros/defineCallClose.hh>
