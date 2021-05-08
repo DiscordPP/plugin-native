@@ -429,7 +429,7 @@ sptr<const std::string> render_target() override {
 }
 #include <discordpp/macros/defineCallClose.hh>
 
-// https://discord.com/developers/docs/resources/guild#list-guild-members
+/*// https://discord.com/developers/docs/resources/guild#list-guild-members
 // TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
@@ -464,4 +464,4 @@ sptr<const std::string> render_target() override {
     }
     return std::make_shared<const std::string>(out);
 }
-#include <discordpp/macros/defineCallClose.hh>
+#include <discordpp/macros/defineCallClose.hh>*/
