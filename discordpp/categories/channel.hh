@@ -226,8 +226,8 @@ sptr<const std::string> render_target() override {
 
 // https://discord.com/developers/docs/resources/channel#create-message
 // UndarkAido/Aido#8614 verified channel_id, content, filename, filetype, file
-// TODO nonce, tts, embed, allowed_mentions, and message_reference are
-// unverified
+// Westlanderz/SenpaiR6#1717 verified embed
+// TODO nonce, tts, allowed_mentions, and message_reference are unverified
 #define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateMessageCall
