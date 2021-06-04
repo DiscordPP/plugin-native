@@ -46,7 +46,7 @@ sptr<const json> render_payload() override {
     if (!_name) {
         throw std::logic_error("Create Guild needs a Name");
     }
-    json out({"name", *_name});
+    json out({{"name", *_name}});
     if (_region) {
         out["region"] = *_region;
     }

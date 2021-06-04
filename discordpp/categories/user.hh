@@ -176,13 +176,14 @@ sptr<const json> render_payload() override {
     if (!_recipient_id) {
         throw std::logic_error("Create DM needs a Recipient ID");
     }
-    json out({"recipient_id", std::to_string(*_recipient_id)});
+    json out({{"recipient_id", std::to_string(*_recipient_id)}});
     return std::make_shared<const json>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#create-group-dm
-// TODO unverified
+// Broken payload identified by Westlanderz/SenpaiR6#1717
+// Verified by UndarkAido/Aido#8614
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGroupDMCall
@@ -205,7 +206,7 @@ sptr<const json> render_payload() override {
     if (!_access_tokens) {
         throw std::logic_error("Create Group DM needs Access Tokens");
     }
-    json out({"access_tokens", *_access_tokens});
+    json out({{"access_tokens", *_access_tokens}});
 
     if (_nicks) {
         out["nicks"] = {};
