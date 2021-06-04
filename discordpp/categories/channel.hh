@@ -457,7 +457,8 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#edit-message
-// TODO unverified
+// Westlanderz/SenpaiR6#1717 verified channel_id, message_id, content, embed and flags
+// TODO allowed_mentions is unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditMessageCall
