@@ -508,7 +508,7 @@ sptr<const json> render_payload() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#delete-message
-// TODO unverified
+// Verified by Westlanderz/SenpaiR6#1717
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteMessageCall
