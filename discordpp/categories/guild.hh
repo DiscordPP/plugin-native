@@ -465,3 +465,30 @@ sptr<const std::string> render_target() override {
     return std::make_shared<const std::string>(out);
 }
 #include <discordpp/macros/defineCallClose.hh>*/
+
+
+//https://discord.com/developers/docs/resources/guild#get-guild-roles
+// Verified by Westlanderz/SenpaiR6#1717
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildRolesCall
+#define function getGuildRoles
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Get Guild Roles needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/roles", *_guild_id));
+}
+#include <discordpp/macros/defineCallClose.hh>
