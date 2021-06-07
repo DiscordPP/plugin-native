@@ -429,8 +429,8 @@ sptr<const std::string> render_target() override {
 }
 #include <discordpp/macros/defineCallClose.hh>
 
-/*// https://discord.com/developers/docs/resources/guild#list-guild-members
-// TODO unverified
+// https://discord.com/developers/docs/resources/guild#list-guild-members
+// Verified by Westlanderz/SenpaiR6#1717
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class ListGuildMembersCall
@@ -452,7 +452,7 @@ sptr<const std::string> render_target() override {
     if (!_guild_id) {
         throw std::logic_error("List Guild Members needs a Guild ID");
     }
-    std::string out = fmt::format("/guilds/{}/members", *_guild_id, *_user_id);
+    std::string out = fmt::format("/guilds/{}/members", *_guild_id);
     bool first = true;
     if (_limit) {
         out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
@@ -464,8 +464,7 @@ sptr<const std::string> render_target() override {
     }
     return std::make_shared<const std::string>(out);
 }
-#include <discordpp/macros/defineCallClose.hh>*/
-
+#include <discordpp/macros/defineCallClose.hh>
 
 //https://discord.com/developers/docs/resources/guild#get-guild-roles
 // Verified by Westlanderz/SenpaiR6#1717
