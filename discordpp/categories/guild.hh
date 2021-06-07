@@ -466,32 +466,6 @@ sptr<const std::string> render_target() override {
 }
 #include <discordpp/macros/defineCallClose.hh>
 
-//https://discord.com/developers/docs/resources/guild#get-guild-roles
-// Verified by Westlanderz/SenpaiR6#1717
-#define Bot PluginEndpoints
-#define Parent Call
-#define Class GetGuildRolesCall
-#define function getGuildRoles
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
-
-#include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_guild_id) {
-        throw std::logic_error("Get Guild Roles needs a Guild ID");
-    }
-    return std::make_shared<const std::string>(
-        fmt::format("/guilds/{}/roles", *_guild_id));
-}
-#include <discordpp/macros/defineCallClose.hh>
-
 //https://discord.com/developers/docs/resources/guild#search-guild-members
 // Verified by Westlanderz/SenpaiR6#1717
 #define Bot PluginEndpoints
@@ -512,20 +486,17 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
-    std::string out = fmt::format("/guilds/{}/members/search", *_guild_id);
-    bool first = true;
     if (!_guild_id) {
         throw std::logic_error("Search Guild Members needs a Guild ID");
     }
+    std::string out = fmt::format("/guilds/{}/members/search", *_guild_id);
     if(!_query) {
         throw std::logic_error("Search Guild Members needs a Query");
     } else {
-        out += fmt::format("{}query={}", first ? "?" : "&", *_query);
-        first = false;
+        out += fmt::format("?query={}", *_query);
     }
     if (_limit) {
-        out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
-        first = false;
+        out += fmt::format("&limit={}", *_limit);
     }
     return std::make_shared<const std::string>(out);
 }
@@ -552,7 +523,7 @@ sptr<const std::string> render_target() override {
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
-        throw std::logic_error("Search Guild Members needs a Guild ID");
+        throw std::logic_error("Modify Current User Nick needs a Guild ID");
     }
     return std::make_shared<const std::string>(
         fmt::format("/guilds/{}/members/@me/nick", *_guild_id));
@@ -565,5 +536,31 @@ sptr<const json> render_payload() override {
         out["nick"] = "";
     }
     return std::make_shared<const json>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+//https://discord.com/developers/docs/resources/guild#get-guild-roles
+// Verified by Westlanderz/SenpaiR6#1717
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildRolesCall
+#define function getGuildRoles
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Get Guild Roles needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/roles", *_guild_id));
 }
 #include <discordpp/macros/defineCallClose.hh>
