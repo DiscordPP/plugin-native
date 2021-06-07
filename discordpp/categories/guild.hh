@@ -531,3 +531,39 @@ sptr<const std::string> render_target() override {
 }
 #include <discordpp/macros/defineCallClose.hh>
 
+//https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+// Verified by Westlanderz/SenpaiR6#1717
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyCurrentUserNickCall
+#define function modifyCurrentUserNick
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(std::string, nick, USEDBY(payload))                              \
+    STATIC_FIELD(std::string, method, "PATCH")                                 \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Search Guild Members needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/members/@me/nick", *_guild_id));
+}
+sptr<const json> render_payload() override {
+    json out;
+    if(_nick) {
+        out["nick"] = *_nick;
+    } else {
+        out["nick"] = "";
+    }
+    return std::make_shared<const json>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
