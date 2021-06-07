@@ -489,12 +489,10 @@ sptr<const std::string> render_target() override {
     if (!_guild_id) {
         throw std::logic_error("Search Guild Members needs a Guild ID");
     }
-    std::string out = fmt::format("/guilds/{}/members/search", *_guild_id);
     if(!_query) {
         throw std::logic_error("Search Guild Members needs a Query");
-    } else {
-        out += fmt::format("?query={}", *_query);
-    }
+    } 
+    std::string out = fmt::format("/guilds/{}/members/search?query={}", *_guild_id, *_query);
     if (_limit) {
         out += fmt::format("&limit={}", *_limit);
     }
