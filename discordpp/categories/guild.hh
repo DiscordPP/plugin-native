@@ -491,3 +491,43 @@ sptr<const std::string> render_target() override {
         fmt::format("/guilds/{}/roles", *_guild_id));
 }
 #include <discordpp/macros/defineCallClose.hh>
+
+//https://discord.com/developers/docs/resources/guild#search-guild-members
+// Verified by Westlanderz/SenpaiR6#1717
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class SearchGuildMembersCall
+#define function searchGuildMembers
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(std::string, query, USEDBY(target))                              \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    std::string out = fmt::format("/guilds/{}/members/search", *_guild_id);
+    bool first = true;
+    if (!_guild_id) {
+        throw std::logic_error("Search Guild Members needs a Guild ID");
+    }
+    if(!_query) {
+        throw std::logic_error("Search Guild Members needs a Query");
+    } else {
+        out += fmt::format("{}query={}", first ? "?" : "&", *_query);
+        first = false;
+    }
+    if (_limit) {
+        out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
+        first = false;
+    }
+    return std::make_shared<const std::string>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
+
