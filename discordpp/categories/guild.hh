@@ -429,8 +429,8 @@ sptr<const std::string> render_target() override {
 }
 #include <discordpp/macros/defineCallClose.hh>
 
-/*// https://discord.com/developers/docs/resources/guild#list-guild-members
-// TODO unverified
+// https://discord.com/developers/docs/resources/guild#list-guild-members
+// Verified by Westlanderz/SenpaiR6#1717
 #define Bot PluginEndpoints
 #define Parent Call
 #define Class ListGuildMembersCall
@@ -452,7 +452,7 @@ sptr<const std::string> render_target() override {
     if (!_guild_id) {
         throw std::logic_error("List Guild Members needs a Guild ID");
     }
-    std::string out = fmt::format("/guilds/{}/members", *_guild_id, *_user_id);
+    std::string out = fmt::format("/guilds/{}/members", *_guild_id);
     bool first = true;
     if (_limit) {
         out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
@@ -464,8 +464,78 @@ sptr<const std::string> render_target() override {
     }
     return std::make_shared<const std::string>(out);
 }
-#include <discordpp/macros/defineCallClose.hh>*/
+#include <discordpp/macros/defineCallClose.hh>
 
+//https://discord.com/developers/docs/resources/guild#search-guild-members
+// Verified by Westlanderz/SenpaiR6#1717
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class SearchGuildMembersCall
+#define function searchGuildMembers
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(std::string, query, USEDBY(target))                              \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Search Guild Members needs a Guild ID");
+    }
+    if(!_query) {
+        throw std::logic_error("Search Guild Members needs a Query");
+    } 
+    std::string out = fmt::format("/guilds/{}/members/search?query={}", *_guild_id, *_query);
+    if (_limit) {
+        out += fmt::format("&limit={}", *_limit);
+    }
+    return std::make_shared<const std::string>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
+
+//https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+// Verified by Westlanderz/SenpaiR6#1717
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyCurrentUserNickCall
+#define function modifyCurrentUserNick
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(std::string, nick, USEDBY(payload))                              \
+    STATIC_FIELD(std::string, method, "PATCH")                                 \
+    HIDE_FIELD(target)                                                         \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    HIDE_FIELD(payload)                                                        \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+
+#include <discordpp/macros/defineCallOpen.hh>
+protected:
+sptr<const std::string> render_target() override {
+    if (!_guild_id) {
+        throw std::logic_error("Modify Current User Nick needs a Guild ID");
+    }
+    return std::make_shared<const std::string>(
+        fmt::format("/guilds/{}/members/@me/nick", *_guild_id));
+}
+sptr<const json> render_payload() override {
+    json out;
+    if(_nick) {
+        out["nick"] = *_nick;
+    } else {
+        out["nick"] = "";
+    }
+    return std::make_shared<const json>(out);
+}
+#include <discordpp/macros/defineCallClose.hh>
 
 //https://discord.com/developers/docs/resources/guild#get-guild-roles
 // Verified by Westlanderz/SenpaiR6#1717
