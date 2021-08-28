@@ -22,12 +22,11 @@
 #define Fields                                                                 \
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     STATIC_FIELD(std::string, method, "GET")                                   \
+    AUTO_TARGET("/applications/{}/commands", application_id)                   \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-#define TPath "/applications/{}/commands"
-#define TFields application_id
 
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
@@ -47,13 +46,11 @@
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
     NEW_FIELD(json, command_type, USEDBY(payload))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(payload)                                                        \
+    AUTO_TARGET("/applications/{}/commands", application_id)                   \
+    AUTO_PAYLOAD(PFR(name) PFR(description) PFO(options)                       \
+                     PFO(default_permission) PFO("type", command_type))        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-#define TPath "/applications/{}/commands"
-#define TFields application_id
-#define PFields PFR(name) PFR(description) PFO(options) PFO(default_permission) PFO("type", command_type)
 
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
