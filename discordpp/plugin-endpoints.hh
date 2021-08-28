@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iomanip>
 #include <fmt/format.h>
+#include <iomanip>
 
 namespace discordpp {
 
@@ -34,10 +34,13 @@ inline std::string url_encode(const std::string &value) {
 
 template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #define ENDPOINT_BREAKOUTS
+
+#include "categories/applicationcmds.hh"
 #include "categories/channel.hh"
 #include "categories/emoji.hh"
 #include "categories/guild.hh"
 #include "categories/user.hh"
+
 #undef ENDPOINT_BREAKOUTS
 };
 
