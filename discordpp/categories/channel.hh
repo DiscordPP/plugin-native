@@ -27,7 +27,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -78,7 +77,6 @@ enum ChannelType {
     HIDE_FIELD(target)                                                         \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -138,7 +136,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -165,7 +162,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(target)                                                         \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -210,7 +206,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -246,7 +241,6 @@ sptr<const std::string> render_target() override {
     FORWARD_FIELD(json, payload, )                                             \
     FORWARD_FIELD(std::string, target, )                                       \
     FORWARD_FIELD(handleWrite, onWrite, ) FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -296,7 +290,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -326,7 +319,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -361,7 +353,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -398,7 +389,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -441,7 +431,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -477,7 +466,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -523,7 +511,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -553,7 +540,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -593,7 +579,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -636,7 +621,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -668,7 +652,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -717,7 +700,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -782,7 +764,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -807,7 +788,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -833,7 +813,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -862,7 +841,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -894,7 +872,6 @@ sptr<const std::string> render_target() override {
     HIDE_FIELD(payload)                                                        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {
@@ -935,7 +912,6 @@ sptr<const json> render_payload() override {
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 protected:
 sptr<const std::string> render_target() override {

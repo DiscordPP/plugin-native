@@ -1,5 +1,5 @@
 //
-// Created by Aidan on 4/20/2021.
+// Created by Aidan on 8/27/2021.
 //
 
 // Howdy! This file contains unverified endpoints so they may need touching up.
@@ -27,7 +27,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -51,7 +50,6 @@
                      PFO(default_permission) PFO("type", command_type))        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -71,7 +69,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -95,7 +92,6 @@
                      PFO(default_permission))                                  \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -115,7 +111,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -133,7 +128,6 @@
     AUTO_TARGET("/applications/{}/commands", application_id, guild_id)         \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 // https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
 // TODO unverified
 #define Bot PluginEndpoints
@@ -150,7 +144,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -176,7 +169,6 @@
                      PFO(default_permission) PFO("type", command_type))        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -198,7 +190,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -224,7 +215,6 @@
                      PFO(default_permission))                                  \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -246,7 +236,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -267,7 +256,6 @@
     FORWARD_FIELD(json, payload, )                                             \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -290,7 +278,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -313,7 +300,6 @@
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -336,7 +322,6 @@
     AUTO_PAYLOAD(PFR(permissions))                                             \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
@@ -358,7 +343,6 @@
     FORWARD_FIELD(json, payload, )                                             \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
-
 #include <discordpp/macros/defineCallOpen.hh>
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
