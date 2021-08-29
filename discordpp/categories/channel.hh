@@ -238,41 +238,13 @@ sptr<const std::string> render_target() override {
     FORWARD_FIELD(std::string, filename, )                                     \
     FORWARD_FIELD(std::string, filetype, )                                     \
     FORWARD_FIELD(std::string, file, )                                         \
-    FORWARD_FIELD(json, payload, )                                             \
-    FORWARD_FIELD(std::string, target, )                                       \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    AUTO_TARGET("/channels/{}/messages", channel_id)                           \
+    AUTO_PAYLOAD(PFO(content) PFO(nonce) PFO(tts) PFO(embed)                   \
+                     PFO(allowed_mentions) PFO(message_reference))             \
     FORWARD_FIELD(handleWrite, onWrite, ) FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_channel_id) {
-        throw std::logic_error("Create Message needs an ID");
-    }
-    return std::make_shared<const std::string>(
-        "/channels/" + std::to_string(*_channel_id) + "/messages");
-}
-sptr<const json> render_payload() override {
-    json out;
-
-    if (_content)
-        out["content"] = *_content;
-
-    if (_nonce)
-        out["nonce"] = *_nonce;
-
-    if (_tts)
-        out["tts"] = *_tts;
-
-    if (_embed)
-        out["embed"] = *_embed;
-
-    if (_allowed_mentions)
-        out["allowed_mentions"] = *_allowed_mentions;
-
-    if (_message_reference)
-        out["message_reference"] = *_message_reference;
-
-    return std::make_shared<const json>(std::move(out));
-}
+// This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#crosspost-message
@@ -446,7 +418,8 @@ sptr<const std::string> render_target() override {
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#edit-message
-// Westlanderz/SenpaiR6#1717 verified channel_id, message_id, content, embed and flags
+// Westlanderz/SenpaiR6#1717 verified channel_id, message_id, content, embed and
+// flags
 // TODO allowed_mentions is unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
