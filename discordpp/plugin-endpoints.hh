@@ -41,6 +41,7 @@ template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #include "categories/guild.hh"
 #include "categories/receiving-and-responding.hh"
 #include "categories/user.hh"
+#include "categories/webhook.hh"
 
 #undef ENDPOINT_BREAKOUTS
 };
