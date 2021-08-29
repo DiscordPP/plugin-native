@@ -36,8 +36,8 @@ enum InteractionCallbackType {
     FORWARD_FIELD(std::string, filetype, )                                     \
     FORWARD_FIELD(std::string, file, )                                         \
     STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/interactions/{}/{}/callback", interaction_id,                \
-                interaction_token)                                             \
+    AUTO_TARGET("/interactions/{}/{}/callback",                                \
+                ARR(interaction_id, interaction_token), )                      \
     AUTO_PAYLOAD(PFR("type", interaction_type) PFO(data))                      \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
@@ -55,8 +55,8 @@ enum InteractionCallbackType {
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     NEW_FIELD(std::string, interaction_token, USEDBY(target))                  \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/webhooks/{}/{}/messages/@original", application_id,          \
-                interaction_token)                                             \
+    AUTO_TARGET("/webhooks/{}/{}/messages/@original",                          \
+                ARR(application_id, interaction_token), )                      \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -78,8 +78,8 @@ enum InteractionCallbackType {
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     NEW_FIELD(std::string, interaction_token, USEDBY(target))                  \
     STATIC_FIELD(std::string, method, "DELETE")                                \
-    AUTO_TARGET("/webhooks/{}/{}/messages/@original", application_id,          \
-                interaction_token)                                             \
+    AUTO_TARGET("/webhooks/{}/{}/messages/@original",                          \
+                ARR(application_id, interaction_token), )                      \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \

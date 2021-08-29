@@ -239,7 +239,7 @@ sptr<const std::string> render_target() override {
     FORWARD_FIELD(std::string, filetype, )                                     \
     FORWARD_FIELD(std::string, file, )                                         \
     STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/channels/{}/messages", channel_id)                           \
+    AUTO_TARGET("/channels/{}/messages", ARR(channel_id), )                    \
     AUTO_PAYLOAD(PFO(content) PFO(nonce) PFO(tts) PFO(embed)                   \
                      PFO(allowed_mentions) PFO(message_reference))             \
     FORWARD_FIELD(handleWrite, onWrite, ) FORWARD_FIELD(handleRead, onRead, )

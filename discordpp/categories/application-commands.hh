@@ -22,7 +22,7 @@
 #define Fields                                                                 \
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/applications/{}/commands", application_id)                   \
+    AUTO_TARGET("/applications/{}/commands", ARR(application_id), )            \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -45,7 +45,7 @@
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
     NEW_FIELD(json, command_type, USEDBY(payload))                             \
     STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/applications/{}/commands", application_id)                   \
+    AUTO_TARGET("/applications/{}/commands", ARR(application_id), )            \
     AUTO_PAYLOAD(PFR(name) PFR(description) PFO(options)                       \
                      PFO(default_permission) PFO("type", command_type))        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -64,7 +64,8 @@
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     NEW_FIELD(snowflake, command_id, USEDBY(target))                           \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/applications/{}/command/{}", application_id, command_id)     \
+    AUTO_TARGET("/applications/{}/command/{}",                                 \
+                ARR(application_id, command_id), )                             \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -87,7 +88,8 @@
     NEW_FIELD(std::vector<json>, options, USEDBY(payload))                     \
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
     STATIC_FIELD(std::string, method, "PATCH")                                 \
-    AUTO_TARGET("/applications/{}/command/{}", application_id, command_id)     \
+    AUTO_TARGET("/applications/{}/command/{}",                                 \
+                ARR(application_id, command_id), )                             \
     AUTO_PAYLOAD(PFO(name) PFO(description) PFO(options)                       \
                      PFO(default_permission))                                  \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -106,7 +108,8 @@
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     NEW_FIELD(snowflake, command_id, USEDBY(target))                           \
     STATIC_FIELD(std::string, method, "DELETE")                                \
-    AUTO_TARGET("/applications/{}/command/{}", application_id, command_id)     \
+    AUTO_TARGET("/applications/{}/command/{}",                                 \
+                ARR(application_id, command_id), )                             \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -125,7 +128,7 @@
 #define Fields                                                                 \
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     STATIC_FIELD(std::string, method, "PUT")                                   \
-    AUTO_TARGET("/applications/{}/commands", application_id)                   \
+    AUTO_TARGET("/applications/{}/commands", ARR(application_id), )            \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -144,8 +147,8 @@
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/applications/{}/guilds/{}/commands", application_id,         \
-                guild_id)                                                      \
+    AUTO_TARGET("/applications/{}/guilds/{}/commands",                         \
+                ARR(application_id, guild_id), )                               \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -169,8 +172,8 @@
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
     NEW_FIELD(json, command_type, USEDBY(payload))                             \
     STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/applications/{}/guilds/{}/commands", application_id,         \
-                guild_id)                                                      \
+    AUTO_TARGET("/applications/{}/guilds/{}/commands",                         \
+                ARR(application_id, guild_id), )                               \
     AUTO_PAYLOAD(PFR(name) PFR(description) PFO(options)                       \
                      PFO(default_permission) PFO("type", command_type))        \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -190,8 +193,8 @@
     NEW_FIELD(snowflake, command_id, USEDBY(target))                           \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/applications/{}/guilds/{}/command/{}", application_id,       \
-                guild_id, command_id)                                          \
+    AUTO_TARGET("/applications/{}/guilds/{}/command/{}",                       \
+                ARR(application_id, guild_id, command_id), )                   \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -215,8 +218,8 @@
     NEW_FIELD(std::vector<json>, options, USEDBY(payload))                     \
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
     STATIC_FIELD(std::string, method, "PATCH")                                 \
-    AUTO_TARGET("/applications/{}/guilds/{}/command/{}", application_id,       \
-                guild_id, command_id)                                          \
+    AUTO_TARGET("/applications/{}/guilds/{}/command/{}",                       \
+                ARR(application_id, guild_id, command_id), )                   \
     AUTO_PAYLOAD(PFO(name) PFO(description) PFO(options)                       \
                      PFO(default_permission))                                  \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -236,8 +239,8 @@
     NEW_FIELD(snowflake, command_id, USEDBY(target))                           \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "DELETE")                                \
-    AUTO_TARGET("/applications/{}/guilds/{}/command/{}", application_id,       \
-                guild_id, command_id)                                          \
+    AUTO_TARGET("/applications/{}/guilds/{}/command/{}",                       \
+                ARR(application_id, guild_id, command_id), )                   \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -257,8 +260,8 @@
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "PUT")                                   \
-    AUTO_TARGET("/applications/{}/guilds/{}/commands", application_id,         \
-                guild_id)                                                      \
+    AUTO_TARGET("/applications/{}/guilds/{}/commands",                         \
+                ARR(application_id, guild_id), )                               \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -280,7 +283,7 @@
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
     AUTO_TARGET("/applications/{}/guilds/{}/commands/permissions",             \
-                application_id, guild_id)                                      \
+                ARR(application_id, guild_id), )                               \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -302,7 +305,7 @@
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "GET")                                   \
     AUTO_TARGET("/applications/{}/guilds/{}/command/{}/permissions",           \
-                application_id, guild_id, command_id)                          \
+                ARR(application_id, guild_id, command_id), )                   \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
@@ -325,7 +328,7 @@
     NEW_FIELD(std::vector<json>, permissions, USEDBY(target))                  \
     STATIC_FIELD(std::string, method, "PUT")                                   \
     AUTO_TARGET("/applications/{}/guilds/{}/command/{}/permissions",           \
-                application_id, guild_id, command_id)                          \
+                ARR(application_id, guild_id, command_id), )                   \
     AUTO_PAYLOAD(PFR(permissions))                                             \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
@@ -346,7 +349,7 @@
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     STATIC_FIELD(std::string, method, "PUT")                                   \
     AUTO_TARGET("/applications/{}/guilds/{}/commands/permissions",             \
-                application_id, guild_id)                                      \
+                ARR(application_id, guild_id), )                               \
     FORWARD_FIELD(json, payload, )                                             \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )

@@ -805,7 +805,7 @@ sptr<const json> render_payload() override {
 #define Fields                                                                 \
     NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
     NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                   \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
     HIDE_FIELD(target)                                                         \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
