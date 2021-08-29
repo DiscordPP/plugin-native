@@ -118,16 +118,22 @@
 // https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands
 // TODO unverified
 #define Bot PluginEndpoints
-#define Parent JsonCall
+#define Parent Call
 #define Class BulkOverwriteGlobalApplicationCommandsCall
 #define function                                                               \
     bulkOverwriteGlobalApplicationCommands, bulkOverwriteGlobalCommands
 #define Fields                                                                 \
     NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
     STATIC_FIELD(std::string, method, "PUT")                                   \
-    AUTO_TARGET("/applications/{}/commands", application_id, guild_id)         \
+    AUTO_TARGET("/applications/{}/commands", application_id)                   \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
 // https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
 // TODO unverified
 #define Bot PluginEndpoints
@@ -243,7 +249,7 @@
 // https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-guild-application-commands
 // TODO unverified
 #define Bot PluginEndpoints
-#define Parent JsonCall
+#define Parent Call
 #define Class BulkOverwriteGuildApplicationCommandsCall
 #define function                                                               \
     bulkOverwriteGuildApplicationCommands, bulkOverwriteGuildCommands
@@ -253,7 +259,8 @@
     STATIC_FIELD(std::string, method, "PUT")                                   \
     AUTO_TARGET("/applications/{}/guilds/{}/commands", application_id,         \
                 guild_id)                                                      \
-    FORWARD_FIELD(json, payload, )                                             \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>

@@ -35,7 +35,7 @@ inline std::string url_encode(const std::string &value) {
 template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #define ENDPOINT_BREAKOUTS
 
-#include "categories/applicationcmds.hh"
+#include "categories/application-commands.hh"
 #include "categories/channel.hh"
 #include "categories/emoji.hh"
 #include "categories/guild.hh"
