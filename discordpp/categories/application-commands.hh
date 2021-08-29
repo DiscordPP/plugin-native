@@ -157,6 +157,8 @@
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
 
+enum ApplicationCommandType { CHAT_INPUT = 1, USER = 2, MESSAGE = 3 };
+
 // https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
 // TODO unverified
 #define Bot PluginEndpoints
@@ -170,7 +172,7 @@
     NEW_FIELD(std::string, description, USEDBY(payload))                       \
     NEW_FIELD(std::vector<json>, options, USEDBY(payload))                     \
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
-    NEW_FIELD(json, command_type, USEDBY(payload))                             \
+    NEW_FIELD(ApplicationCommandType, command_type, USEDBY(payload))                             \
     STATIC_FIELD(std::string, method, "POST")                                  \
     AUTO_TARGET("/applications/{}/guilds/{}/commands",                         \
                 ARR(application_id, guild_id), )                               \
