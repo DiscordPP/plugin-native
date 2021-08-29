@@ -205,7 +205,7 @@
     FORWARD_FIELD(std::string, file, )                                         \
     STATIC_FIELD(std::string, method, "POST")                                  \
     AUTO_TARGET("/webhooks/{}/{}", ARR(webhook_id, webhook_token),             \
-                ARR(QSO(wait), QSO(thread_id)))                                \
+                QSO(wait) QSO(thread_id))                                      \
     AUTO_PAYLOAD(PFO(content) PFO(username) PFO(avatar_url) PFO(tts)           \
                      PFO(embeds) PFO(allowed_mentions) PFO(components))        \
     FORWARD_FIELD(handleWrite, onWrite, ) FORWARD_FIELD(handleRead, onRead, )
