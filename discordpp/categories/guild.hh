@@ -392,6 +392,24 @@ sptr<const json> render_payload() override {
 }
 #include <discordpp/macros/defineCallClose.hh>
 
+// https://discord.com/developers/docs/resources/guild#list-active-threads
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class ListActiveThreadsCall
+#define function listActiveThreads
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    AUTO_TARGET("/guilds/{guild.id}/threads/active", ARR(guild_id), )          \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
 // https://discord.com/developers/docs/resources/guild#get-guild-member
 // TODO unverified
 #define Bot PluginEndpoints
