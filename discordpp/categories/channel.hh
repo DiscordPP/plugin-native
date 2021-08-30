@@ -204,8 +204,7 @@ sptr<const std::string> render_target() override {
 
 // https://discord.com/developers/docs/resources/channel#create-message
 // UndarkAido/Aido#8614 verified channel_id, content, filename, filetype, file
-// Westlanderz/SenpaiR6#1717 verified embed
-// TODO nonce, tts, allowed_mentions, and message_reference are unverified
+// TODO embeds, nonce, tts, allowed_mentions, and message_reference are unverified
 #define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateMessageCall
@@ -215,7 +214,7 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(std::string, content, USEDBY(payload))                           \
     NEW_FIELD(Nonce, nonce, USEDBY(payload))                                   \
     NEW_FIELD(bool, tts, USEDBY(payload))                                      \
-    NEW_FIELD(json, embed, USEDBY(payload))                                    \
+    NEW_FIELD(std::vector<json>, embeds, USEDBY(payload))                                    \
     NEW_FIELD(json, allowed_mentions, USEDBY(payload))                         \
     NEW_FIELD(json, message_reference, USEDBY(payload))                        \
     FORWARD_FIELD(std::string, filename, )                                     \
@@ -223,7 +222,7 @@ sptr<const std::string> render_target() override {
     FORWARD_FIELD(std::string, file, )                                         \
     STATIC_FIELD(std::string, method, "POST")                                  \
     AUTO_TARGET("/channels/{}/messages", ARR(channel_id), )                    \
-    AUTO_PAYLOAD(PFO(content) PFO(nonce) PFO(tts) PFO(embed)                   \
+    AUTO_PAYLOAD(PFO(content) PFO(nonce) PFO(tts) PFO(embeds)                   \
                      PFO(allowed_mentions) PFO(message_reference))             \
     FORWARD_FIELD(handleWrite, onWrite, ) FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
