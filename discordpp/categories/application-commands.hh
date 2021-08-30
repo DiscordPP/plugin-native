@@ -157,8 +157,6 @@
 // This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
 
-enum ApplicationCommandType { CHAT_INPUT = 1, USER = 2, MESSAGE = 3 };
-
 // https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
 // UndarkAido/Aido#8614 verified application_id, guild_id, name, description,
 // options, command_type

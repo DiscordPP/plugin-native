@@ -13,14 +13,6 @@
 #error This header should only be included in plugin-endpoints.hh
 #endif
 
-enum InteractionCallbackType {
-    PONG = 1,
-    CHANNEL_MESSAGE_WITH_SOURCE = 4,
-    DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE = 5,
-    DEFERRED_UPDATE_MESSAGE = 6,
-    UPDATE_MESSAGE = 7
-};
-
 // https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response
 // UndarkAido/Aido#8614 verified interaction_id, interaction_token,
 // interaction_type, data
