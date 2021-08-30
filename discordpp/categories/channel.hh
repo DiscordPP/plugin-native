@@ -880,3 +880,203 @@ sptr<const std::string> render_target() override {
         std::to_string(*_user_id));
 }
 #include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#start-thread-with-message
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class StartThreadWithMessageCall
+#define function startThreadWithMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, name, USEDBY(payload))                              \
+    NEW_FIELD(int, auto_archive_duration, USEDBY(payload))                     \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    AUTO_TARGET("/channels/{}/messages/{}/threads",                            \
+                ARR(channel_id, message_id), )                                 \
+    AUTO_PAYLOAD(PFR(name) PFR(auto_archive_duration))                         \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#start-thread-without-message
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class StartThreadWithoutMessageCall
+#define function startThreadWithoutMessage, startThreadWoutMessage
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, name, USEDBY(payload))                              \
+    NEW_FIELD(int, auto_archive_duration, USEDBY(payload))                     \
+    NEW_FIELD(ChannelType, thread_type, USEDBY(payload))                       \
+    NEW_FIELD(bool, invitable, USEDBY(payload))                                \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    AUTO_TARGET("/channels/{}/threads", ARR(channel_id), )                     \
+    AUTO_PAYLOAD(PFR(name) PFR(auto_archive_duration))                         \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#join-thread
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class JoinThreadCall
+#define function joinThread
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )          \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#add-thread-member
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class AddThreadMemberCall
+#define function addThreadMember
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "PUT")                                   \
+    AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )  \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#leave-thread
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class LeaveThreadCall
+#define function leaveThread
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )          \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#remove-thread-member
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class RemoveThreadMemberCall
+#define function removeThreadMember
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
+    STATIC_FIELD(std::string, method, "DELETE")                                \
+    AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )  \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#list-thread-members
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class ListThreadMembersCall
+#define function listThreadMembers
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    AUTO_TARGET("/channels/{}/thread-members", ARR(channel_id), )              \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#list-active-threads
+//  DEPRECATED
+
+// https://discord.com/developers/docs/resources/channel#list-public-archived-threads
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class ListPublicArchivedThreadsCall
+#define function listPublicArchivedThreads
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, before, USEDBY(target))                             \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    AUTO_TARGET("/channels/{}/threads/archived/public", ARR(channel_id),       \
+                QSO(before) QSO(limit))                                        \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#list-private-archived-threads
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class ListPrivateArchivedThreadsCall
+#define function listPrivateArchivedThreads
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, before, USEDBY(target))                             \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    AUTO_TARGET("/channels/{}/threads/archived/private", ARR(channel_id),      \
+                QSO(before) QSO(limit))                                        \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
+//  TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class ListJoinedPrivateArchivedThreadsCall
+#define function listJoinedPrivateArchivedThreads
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
+    NEW_FIELD(std::string, before, USEDBY(target))                             \
+    NEW_FIELD(int, limit, USEDBY(target))                                      \
+    STATIC_FIELD(std::string, method, "GET")                                   \
+    AUTO_TARGET("/channels/{}/users/@me/threads/archived/private",             \
+                ARR(channel_id), QSO(before) QSO(limit))                       \
+    HIDE_FIELD(type)                                                           \
+    HIDE_FIELD(body)                                                           \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
+#include <discordpp/macros/defineCallClose.hh>
