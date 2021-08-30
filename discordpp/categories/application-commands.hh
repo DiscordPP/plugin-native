@@ -160,6 +160,8 @@
 enum ApplicationCommandType { CHAT_INPUT = 1, USER = 2, MESSAGE = 3 };
 
 // https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
+// UndarkAido/Aido#8614 verified application_id, guild_id, name, description,
+// options, command_type
 // TODO unverified
 #define Bot PluginEndpoints
 #define Parent JsonCall
@@ -172,7 +174,7 @@ enum ApplicationCommandType { CHAT_INPUT = 1, USER = 2, MESSAGE = 3 };
     NEW_FIELD(std::string, description, USEDBY(payload))                       \
     NEW_FIELD(std::vector<json>, options, USEDBY(payload))                     \
     NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
-    NEW_FIELD(ApplicationCommandType, command_type, USEDBY(payload))                             \
+    NEW_FIELD(ApplicationCommandType, command_type, USEDBY(payload))           \
     STATIC_FIELD(std::string, method, "POST")                                  \
     AUTO_TARGET("/applications/{}/guilds/{}/commands",                         \
                 ARR(application_id, guild_id), )                               \

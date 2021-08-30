@@ -22,7 +22,10 @@ enum InteractionCallbackType {
 };
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response
-//  TODO unverified
+// UndarkAido/Aido#8614 verified interaction_id, interaction_token,
+// interaction_type, data
+// Note: interaction_id is the ID of the interaction *event*
+// TODO unverified
 #define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateInteractionResponseCall
