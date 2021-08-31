@@ -486,27 +486,14 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(std::string, query, USEDBY(target))                              \
     NEW_FIELD(int, limit, USEDBY(target))                                      \
     STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
+    AUTO_TARGET("/guilds/{}/members/search", ARR(guild_id),                    \
+                QSR(query) QSO(limit))                                         \
     HIDE_FIELD(type)                                                           \
     HIDE_FIELD(body)                                                           \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_guild_id) {
-        throw std::logic_error("Search Guild Members needs a Guild ID");
-    }
-    if (!_query) {
-        throw std::logic_error("Search Guild Members needs a Query");
-    }
-    std::string out =
-        fmt::format("/guilds/{}/members/search?query={}", *_guild_id, *_query);
-    if (_limit) {
-        out += fmt::format("&limit={}", *_limit);
-    }
-    return std::make_shared<const std::string>(out);
-}
+// This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/guild#add-guild-member
@@ -524,44 +511,21 @@ sptr<const std::string> render_target() override {
     NEW_FIELD(bool, mute, USEDBY(payload))                                     \
     NEW_FIELD(bool, deaf, USEDBY(payload))                                     \
     STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
+    AUTO_TARGET("/guilds/{}/members/{}", ARR(guild_id, user_id), )             \
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_guild_id) {
-        throw std::logic_error("Add Guild Member needs a Guild ID");
-    }
-    if (!_user_id) {
-        throw std::logic_error("Add Guild Member needs a User ID");
-    }
-    return std::make_shared<const std::string>(
-        fmt::format("/guilds/{}/members/{}", *_guild_id, *_user_id));
-}
 sptr<const json> render_payload() override {
-    if (!_access_token) {
-        throw std::logic_error("Add Guild Member needs an Access Token");
-    }
-    json out({{"access_token", *_access_token}});
-    if (_nick) {
-        out["nick"] = *_nick;
-    }
+    json out;
+    PFR(access_token);
+    PFO(nick);
     if (_roles) {
         out["roles"] = json::array();
-        std::transform(std::begin(*_roles), std::end(*_roles),
-                       std::back_inserter(out["roles"]),
-                       [](double d) { return std::to_string(d); });
+        std::transform(_roles->begin(), _roles->end(), out["roles"].begin(),
+                       [](snowflake s) { return std::to_string(s); });
     }
-    if (_mute) {
-        out["mute"] = *_mute;
-    }
-    if (_deaf) {
-        out["deaf"] = *_deaf;
-    }
+    PFO(mute);
+    PFO(deaf);
     return std::make_shared<const json>(out);
 }
 #include <discordpp/macros/defineCallClose.hh>
@@ -606,9 +570,8 @@ sptr<const json> render_payload() override {
     }
     if (_roles) {
         out["roles"] = json::array();
-        std::transform(std::begin(*_roles), std::end(*_roles),
-                       std::back_inserter(out["roles"]),
-                       [](double d) { return std::to_string(d); });
+        std::transform(_roles->begin(), _roles->end(), out["roles"].begin(),
+                       [](snowflake s) { return std::to_string(s); });
     }
     if (_mute) {
         out["mute"] = *_mute;
@@ -621,6 +584,24 @@ sptr<const json> render_payload() override {
     }
     return std::make_shared<const json>(out);
 }
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyCurrentUserNickCall
+#define function modifyCurrentUserNick
+#define Fields                                                                 \
+    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
+    NEW_FIELD(std::optional<std::string>, nick, USEDBY(payload))               \
+    STATIC_FIELD(std::string, method, "POST")                                  \
+    AUTO_TARGET("/guilds/{}/members/@me/nick", ARR(guild_id), )                \
+    AUTO_PAYLOAD(PFO(nick))                                                    \
+    FORWARD_FIELD(handleWrite, onWrite, )                                      \
+    FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallOpen.hh>
+// This line intentionally left blank
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/guild#add-guild-member-role
@@ -849,21 +830,413 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetGuildRolesCall
 #define function getGuildRoles
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/guilds/{}/roles", ARR(guild_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#create-guild-role
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class CreateGuildRoleCall
+#define function createGuildRole
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(std::string, permissions, USEDBY(payload))
+NEW_FIELD(int, color, USEDBY(payload))
+NEW_FIELD(bool, hoist, USEDBY(payload))
+NEW_FIELD(bool, mentionable, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/guilds/{}/roles", ARR(guild_id), )
+AUTO_PAYLOAD(PFR(name) PFR(permissions) PFR(color) PFR(hoist) PFR(mentionable))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyGuildRolePositionsCall
+#define function modifyGuildRolePositions
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, id, USEDBY(payload))
+NEW_FIELD(int, position, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/guilds/{}/roles", ARR(guild_id), )
+HIDE_FIELD(payload)
+protected:
+sptr<const json> render_payload() override {
+    json out;
+    REQUIRE_VAR(id);
+    out["id"] = *_id;
+    PFO(position);
+    return std::make_shared<const json>(out);
+}
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-guild-role
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyGuildRoleCall
+#define function modifyGuildRole
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, role_id, USEDBY(target))
+NEW_FIELD(std::optional<std::string>, name, USEDBY(payload))
+NEW_FIELD(std::optional<std::string>, permissions, USEDBY(payload))
+NEW_FIELD(std::optional<int>, color, USEDBY(payload))
+NEW_FIELD(std::optional<bool>, hoist, USEDBY(payload))
+NEW_FIELD(std::optional<bool>, mentionable, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/guilds/{}/roles/{}", ARR(guild_id, role_id), )
+AUTO_PAYLOAD(PFO(name) PFO(permissions) PFO(color) PFO(hoist) PFO(mentionable))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#delete-guild-role
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteGuildRoleCall
+#define function deleteGuildRole
+#include <discordpp/macros/defineCallOpen.hh>
+STATIC_FIELD(std::string, method, "DELETE")
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, role_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/roles/{}", ARR(guild_id, role_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-prune-count
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildPruneCountCall
+#define function getGuildPruneCount
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(int, days, USEDBY(target))
+NEW_FIELD(std::vector<snowflake>, include_roles, USEDBY(target))
+HIDE_FIELD(target)
 protected:
 sptr<const std::string> render_target() override {
-    if (!_guild_id) {
-        throw std::logic_error("Get Guild Roles needs a Guild ID");
+    REQUIRE_VAR(guild_id)
+    std::string out = fmt::format("/guilds/{}/roles", to_string(*_guild_id));
+    bool first = true;
+    if (_days) {
+        out += fmt::format("{}days={}", first ? "?" : "&", *_days);
+        first = false;
     }
-    return std::make_shared<const std::string>(
-        fmt::format("/guilds/{}/roles", *_guild_id));
+    if (_include_roles) {
+        out += fmt::format("{}include_roles={}", first ? "?" : "&", [this]() {
+            std::string out;
+            bool first = true;
+            std::for_each(_include_roles->begin(), _include_roles->end(),
+                          [&first, &out](snowflake &sf) {
+                              out += fmt::format("{}{}", first ? "" : ",",
+                                                 to_string(sf));
+                              first = false;
+                          });
+            return std::move(out);
+        });
+        first = false;
+    };
+    return std::make_shared<const std::string>(out);
 }
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#begin-guild-prune
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class BeginGuildPruneCall
+#define function beginGuildPrune
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(int, days, USEDBY(payload))
+NEW_FIELD(bool, compute_prune_count, USEDBY(payload))
+NEW_FIELD(std::vector<snowflake>, include_roles, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/guilds/{}/prune", ARR(guild_id), )
+HIDE_FIELD(payload)
+protected:
+sptr<const json> render_payload() override {
+    json out;
+    PFO(guild_id)
+    PFO(days)
+    if (_include_roles) {
+        out["roles"] = json::array();
+        std::transform(_include_roles->begin(), _include_roles->end(),
+                       out["roles"].begin(),
+                       [](snowflake s) { return std::to_string(s); });
+    }
+    return std::make_shared<const json>(std::move(out));
+}
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildVoiceRegionsCall
+#define function getGuildVoiceRegions
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/regions", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-invites
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildInvitesCall
+#define function getGuildInvites
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/invites", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-integrations
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildIntegrationsCall
+#define function getGuildIntegrations
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/integrations", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#delete-guild-integration
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteGuildIntegrationsCall
+#define function deleteGuildIntegrations
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, interaction_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/integrations/{}", ARR(guild_id, interaction_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-widget-settings
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildWidgetSettingsCall
+#define function getGuildWidgetSettings
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/widget", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-guild-widget
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyGuildWidgetCall
+#define function modifyGuildWidget
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(bool, enabled, USEDBY(payload))
+NEW_FIELD(std::optional<snowflake>, channel_id, USEDBY(payload))
+AUTO_TARGET("/guilds/{}/widget", ARR(guild_id), )
+AUTO_PAYLOAD(PFO(enabled) PFO(channel_id))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-widget
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildWidgetCall
+#define function getGuildWidget
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/widget.json", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-vanity-url
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetVanityURLCall
+#define function getVanityURL
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/vanity-url", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-widget-image
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class GetGuildWidgetImageCall
+#define function getGuildWidgetImage
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::string, style, USEDBY(target))
+auto style(const WidgetStyleOptions &styleIn) {
+    static const char* strs[] = {"shield", "banner1", "banner2", "banner3",
+                                "banner4"};
+    return style(std::make_shared<std::string>(strs[styleIn]));
+}
+AUTO_TARGET("/guilds/{}/widget.png", ARR(guild_id), QSO(style))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class GetGuildWelcomeScreenCall
+#define function getGuildWelcomeScreen
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+AUTO_TARGET("/guilds/{}/welcome-screen", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyGuildWelcomeScreenCall
+#define function modifyGuildWelcomeScreen
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::optional<bool>, enabled, USEDBY(payload))
+NEW_FIELD(std::optional<std::vector<json>>, welcome_channels, USEDBY(payload))
+NEW_FIELD(std::optional<std::string>, description, USEDBY(payload))
+AUTO_TARGET("/guilds/{}/welcome-screen", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "PATCH")
+AUTO_PAYLOAD(PFO(enabled) PFO(welcome_channels) PFO(description))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyCurrentUserVoiceStateCall
+#define function modifyCurrentUserVoiceState
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, channel_id, USEDBY(payload))
+NEW_FIELD(bool, suppress, USEDBY(payload))
+NEW_FIELD(std::optional<std::string>, request_to_speak_timestamp,
+          USEDBY(payload))
+AUTO_TARGET("/guilds/{}/voice-states/@me", ARR(guild_id), )
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(payload)
+protected:
+sptr<const json> render_payload() override {
+    json out;
+    if (_channel_id) {
+        out["channel_id"] = to_string(*_channel_id);
+    }
+    PFO(suppress)
+    PFO(request_to_speak_timestamp)
+    return std::make_shared<const json>(std::move(out));
+}
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/guild#modify-user-voice-state
+// TODO Unverified
+#define Bot PluginEndpoints
+#define Parent JsonCall
+#define Class ModifyUserVoiceStateCall
+#define function modifyUserVoiceState
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(snowflake, channel_id, USEDBY(payload))
+NEW_FIELD(bool, suppress, USEDBY(payload))
+AUTO_TARGET("/guilds/{}/voice-states/{}}", ARR(guild_id, user_id), )
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(payload)
+protected:
+sptr<const json> render_payload() override {
+    json out;
+    if (_channel_id) {
+        out["channel_id"] = to_string(*_channel_id);
+    }
+    PFO(suppress)
+    return std::make_shared<const json>(std::move(out));
+}
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>

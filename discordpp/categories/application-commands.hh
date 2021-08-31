@@ -37,21 +37,19 @@
 #define Parent JsonCall
 #define Class CreateGlobalApplicationCommandCall
 #define function createGlobalApplicationCommand, createGlobalCommand
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, application_id, USEDBY(target))                       \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(std::string, description, USEDBY(payload))                       \
-    NEW_FIELD(std::vector<json>, options, USEDBY(payload))                     \
-    NEW_FIELD(bool, default_permission, USEDBY(payload))                       \
-    NEW_FIELD(json, command_type, USEDBY(payload))                             \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/applications/{}/commands", ARR(application_id), )            \
-    AUTO_PAYLOAD(PFR(name) PFR(description) PFO(options)                       \
-                     PFO(default_permission) PFO("type", command_type))        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(std::string, description, USEDBY(payload))
+NEW_FIELD(std::vector<json>, options, USEDBY(payload))
+NEW_FIELD(bool, default_permission, USEDBY(payload))
+NEW_FIELD(json, command_type, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/applications/{}/commands", ARR(application_id), )
+AUTO_PAYLOAD(PFR(name) PFR(description) PFO(options) PFO(default_permission)
+                 PFO("type", command_type))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/interactions/application-commands#get-global-application-command
