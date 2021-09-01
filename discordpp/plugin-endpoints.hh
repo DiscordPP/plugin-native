@@ -36,6 +36,7 @@ template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #define ENDPOINT_BREAKOUTS
 
 #include "categories/application-commands.hh"
+#include "categories/audit-log.hh"
 #include "categories/channel.hh"
 #include "categories/emoji.hh"
 #include "categories/guild.hh"
