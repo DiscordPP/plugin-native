@@ -35,7 +35,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetUserCall
 #define function getUser
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/users/{}", ARR(user_id), )
 HIDE_FIELD(target)
@@ -71,8 +71,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetCurrentUserGuildsCall
 #define function getCurrentUserGuilds, getOwnGuilds
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, before, USEDBY(target))
-NEW_FIELD(snowflake, after, USEDBY(target))
+NEW_FIELD(Snowflake, before, USEDBY(target))
+NEW_FIELD(Snowflake, after, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(target)
@@ -107,7 +107,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class LeaveGuildCall
 #define function leaveGuild
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/users/{}", ARR(guild_id), )
 HIDE_FIELD(type)
@@ -123,7 +123,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateDMCall
 #define function createDM
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, recipient_id, USEDBY(payload))
+NEW_FIELD(Snowflake, recipient_id, USEDBY(payload))
 STATIC_FIELD(std::string, method, "POST")
 STATIC_FIELD(std::string, target, "/users/@me/channels")
 AUTO_PAYLOAD(PFR(recipient_id))
@@ -141,7 +141,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
 NEW_FIELD(std::vector<std::string>, access_tokens, USEDBY(payload))
 #define COMMA ,
-NEW_FIELD(std::map<snowflake COMMA std::string>, nicks, USEDBY(payload))
+NEW_FIELD(std::map<Snowflake COMMA std::string>, nicks, USEDBY(payload))
 #undef COMMA
 STATIC_FIELD(std::string, method, "POST")
 STATIC_FIELD(std::string, target, "/users/@me/channels")

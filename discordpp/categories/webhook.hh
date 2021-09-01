@@ -20,7 +20,7 @@
 #define Class CreateWebhookCall
 #define function createWebhook
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::string, avatar, USEDBY(payload))
 STATIC_FIELD(std::string, method, "POST")
@@ -37,7 +37,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetChannelWebhooksCall
 #define function getChannelWebhooks
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/channels/{}/webhooks", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -53,7 +53,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetGuildWebhooksCall
 #define function getGuildWebhooks
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/webhooks", ARR(guild_id), )
 HIDE_FIELD(type)
@@ -69,7 +69,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetWebhookCall
 #define function getWebhook
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/webhooks/{}", ARR(webhook_id), )
 HIDE_FIELD(type)
@@ -85,7 +85,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetWebhookWithTokenCall
 #define function getWebhookWithToken
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/webhooks/{}/{}", ARR(webhook_id, webhook_token), )
@@ -102,10 +102,10 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ModifyWebhookCall
 #define function modifyWebhook
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::optional<std::string>, avatar, USEDBY(payload))
-NEW_FIELD(snowflake, channel_id, USEDBY(payload))
+NEW_FIELD(Snowflake, channel_id, USEDBY(payload))
 STATIC_FIELD(std::string, method, "POST")
 AUTO_TARGET("/webhooks/{}", ARR(webhook_id), )
 AUTO_PAYLOAD(PFR(name) PFO(avatar) PFO(channel_id))
@@ -120,7 +120,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ModifyWebhookWithTokenCall
 #define function modifyWebhookWithToken
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::optional<std::string>, avatar, USEDBY(payload))
@@ -138,7 +138,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteWebhookCall
 #define function deleteWebhook
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/webhooks/{}", ARR(webhook_id), )
 HIDE_FIELD(type)
@@ -154,7 +154,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteWebhookWithTokenCall
 #define function deleteWebhookWithToken
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/webhooks/{}/{}", ARR(webhook_id, webhook_token), )
@@ -171,10 +171,10 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ExecuteWebhookCall
 #define function executeWebhook
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
 NEW_FIELD(bool, wait, USEDBY(target))
-NEW_FIELD(snowflake, thread_id, USEDBY(target))
+NEW_FIELD(Snowflake, thread_id, USEDBY(target))
 NEW_FIELD(std::string, content, USEDBY(payload))
 NEW_FIELD(std::string, username, USEDBY(payload))
 NEW_FIELD(std::string, avatar_url, USEDBY(payload))
@@ -207,9 +207,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetWebhookMessageCall
 #define function getWebhookMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/webhooks/{}/{}/messages/{}",
             ARR(webhook_id, webhook_token, message_id), )
@@ -226,9 +226,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class editWebhookMessageCall
 #define function editWebhookMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, content, USEDBY(payload))
 NEW_FIELD(std::vector<json>, embeds, USEDBY(payload))
 NEW_FIELD(json, allowed_mentions, USEDBY(payload))
@@ -251,9 +251,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteWebhookMessageCall
 #define function deleteWebhookMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, webhook_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_id, USEDBY(target))
 NEW_FIELD(std::string, webhook_token, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/webhooks/{}/{}/messages/{}",
             ARR(webhook_id, webhook_token, message_id), )

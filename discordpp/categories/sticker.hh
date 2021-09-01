@@ -20,7 +20,7 @@
 #define Class GetStickerCall
 #define function getSticker
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, sticker_id, USEDBY(target))
+NEW_FIELD(Snowflake, sticker_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/stickers/{}", ARR(sticker_id), )
 HIDE_FIELD(type)
@@ -51,8 +51,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ListGuildStickerCall
 #define function listGuildStickers, getGuildStickers
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, sticker_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, sticker_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/stickers", ARR(guild_id), )
 HIDE_FIELD(type)
@@ -68,8 +68,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetGuildStickerCall
 #define function getGuildSticker
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, sticker_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, sticker_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/stickers/{}", ARR(guild_id, sticker_id), )
 HIDE_FIELD(type)
@@ -85,7 +85,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateGuildStickerCall
 #define function createGuildStickers
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/stickers", ARR(guild_id), )
 NEW_FIELD(std::string, name, USEDBY(payload))
@@ -106,7 +106,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ModifyGuildStickerCall
 #define function modifyGuildStickers
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/stickers", ARR(guild_id), )
 NEW_FIELD(std::string, name, USEDBY(payload))
@@ -124,8 +124,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteGuildStickerCall
 #define function deleteGuildSticker
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, sticker_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, sticker_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/stickers/{}", ARR(guild_id, sticker_id), )
 HIDE_FIELD(type)

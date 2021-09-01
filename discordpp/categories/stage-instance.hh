@@ -22,7 +22,7 @@
 #include <discordpp/macros/defineCallOpen.hh>
 STATIC_FIELD(std::string, method, "POST")
 STATIC_FIELD(std::string, target, "/stage-instances")
-NEW_FIELD(snowflake, channel_id, USEDBY(payload))
+NEW_FIELD(Snowflake, channel_id, USEDBY(payload))
 NEW_FIELD(std::string, topic, USEDBY(payload))
 NEW_FIELD(int, privacy_level, USEDBY(payload))
 AUTO_PAYLOAD(PFR(channel_id) PFR(topic) PFO(privacy_level))
@@ -37,7 +37,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetStageInstanceLogCall
 #define function getStageInstance
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/stage-instances/{}", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -53,7 +53,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ModifyStageInstanceLogCall
 #define function modifyStageInstance
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PATCH")
 AUTO_TARGET("/stage-instances/{}", ARR(channel_id), )
 NEW_FIELD(std::string, topic, USEDBY(payload))
@@ -70,7 +70,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteStageInstanceLogCall
 #define function deleteStageInstance
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/stage-instances/{}", ARR(channel_id), )
 HIDE_FIELD(type)

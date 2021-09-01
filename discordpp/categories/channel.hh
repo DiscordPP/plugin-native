@@ -20,7 +20,7 @@
 #define Class GetChannelCall
 #define function getChannel
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/channels/{}", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -36,7 +36,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ModifyChannelCall
 #define function modifyChannel
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(int, channel_type, USEDBY(payload))
 NEW_FIELD(int, position, USEDBY(payload))
@@ -46,7 +46,7 @@ NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))
 NEW_FIELD(int, bitrate, USEDBY(payload))
 NEW_FIELD(int, user_limit, USEDBY(payload))
 NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))
-NEW_FIELD(snowflake, parent_id, USEDBY(payload))
+NEW_FIELD(Snowflake, parent_id, USEDBY(payload))
 STATIC_FIELD(std::string, method, "PATCH")
 AUTO_TARGET("/channels/{}", ARR(channel_id), )
 AUTO_PAYLOAD(PFO(name) PFO(channel_type) PFO(position) PFO(topic) PFO(nsfw)
@@ -63,7 +63,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteChannelCall
 #define function deleteChannel, closeChannel
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/channels/{}", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -79,10 +79,10 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetChannelMessagesCall
 #define function getChannelMessages
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, around, USEDBY(target))
-NEW_FIELD(snowflake, before, USEDBY(target))
-NEW_FIELD(snowflake, after, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, around, USEDBY(target))
+NEW_FIELD(Snowflake, before, USEDBY(target))
+NEW_FIELD(Snowflake, after, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/channels/{}/messages", ARR(channel_id),
@@ -98,8 +98,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetChannelMessageCall
 #define function getChannelMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/channels/{}/messages/{}", ARR(channel_id, message_id), )
 HIDE_FIELD(type)
@@ -117,7 +117,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateMessageCall
 #define function createMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, content, USEDBY(payload))
 NEW_FIELD(Nonce, nonce, USEDBY(payload))
 NEW_FIELD(bool, tts, USEDBY(payload))
@@ -142,8 +142,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CrosspostMessageCall
 #define function crosspostMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "POST")
 AUTO_TARGET("/channels/{}/messages/{}/crosspost", ARR(channel_id, message_id), )
 HIDE_FIELD(type)
@@ -159,8 +159,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateReactionCall
 #define function createReaction
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, emoji, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/channels/{}/messages/{}/reactions/{}/@me",
@@ -178,10 +178,10 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteOwnReactionCall
 #define function deleteOwnReaction
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, emoji, USEDBY(target))
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 protected:
@@ -208,10 +208,10 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteUserReactionCall
 #define function deleteUserReaction
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, emoji, USEDBY(target))
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 protected:
@@ -238,11 +238,11 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetReactionsCall
 #define function getReactions
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, emoji, USEDBY(target))
-NEW_FIELD(snowflake, before, USEDBY(target))
-NEW_FIELD(snowflake, after, USEDBY(target))
+NEW_FIELD(Snowflake, before, USEDBY(target))
+NEW_FIELD(Snowflake, after, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(target)
@@ -251,7 +251,7 @@ sptr<const std::string> render_target() override {
     REQUIRE_VAR(channel_id)
     REQUIRE_VAR(message_id)
     REQUIRE_VAR(emoji)
-    std::String out = std::make_shared<const std::string>(fmt::format(
+    std::string out = std::make_shared<const std::string>(fmt::format(
         "/channels/{}/messages/{}/reactions/{}", std::to_string(*_channel_id),
         std::to_string(*_message_id), util::url_encode(*_emoji)));
     bool first = true;
@@ -272,15 +272,15 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteAllReactionsCall
 #define function deleteAllReactions
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 protected:
 sptr<const std::string> render_target() override {
     REQUIRE_VAR(channel_id)
     REQUIRE_VAR(message_id)
-    return std::make_shared<const std::string>(fmt::format("/channels/{}/messages/{}/reactions",*_channel_id,*_message_id);
+    return std::make_shared<const std::string>(fmt::format("/channels/{}/messages/{}/reactions",*_channel_id,*_message_id));
 }
 HIDE_FIELD(type)
 HIDE_FIELD(body)
@@ -295,8 +295,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteAllReactionsForEmojiCall
 #define function deleteAllReactionsForEmoji
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, emoji, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
@@ -324,14 +324,14 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class EditMessageCall
 #define function editMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, content, USEDBY(payload))
 NEW_FIELD(json, embed, USEDBY(payload))
 NEW_FIELD(int, flags, USEDBY(payload))
 NEW_FIELD(json, allowed_mentions, USEDBY(payload))
 STATIC_FIELD(std::string, method, "PATCH")
-AUTO_TARGET("/channels/{}/messages/{}"),ARR(channel_id, message_id),)
+AUTO_TARGET("/channels/{}/messages/{}",ARR(channel_id, message_id),)
 HIDE_FIELD(type)
 HIDE_FIELD(body)
 AUTO_PAYLOAD(PFO(content)PFO(embed)PFO(flags)PFO(allowed_mentions))
@@ -346,8 +346,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteMessageCall
 #define function deleteMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/channels/{}/messages/{}",ARR(channel_id, message_id),)
 HIDE_FIELD(type)
@@ -363,25 +363,15 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class BulkDeleteMessagesCall
 #define function bulkDeleteMessages
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(std::vector<snowflake>, messages, USEDBY(payload))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::vector<Snowflake>, messages, USEDBY(payload))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/channels/{}/messages/bulk-delete",ARR(channel_id),)
 HIDE_FIELD(type)
 HIDE_FIELD(body)
-HIDE_FIELD(payload)
+AUTO_PAYLOAD(PFR(messages))
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
-sptr<const json> render_payload() override {
-    json out;
-
-    if (!_messages)
-        throw std::logic_error(
-            "Bulk Delete Messages needs an array of messages");
-    out["messages"] = *_messages;
-
-    return std::make_shared<const json>(std::move(out));
-}
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#edit-channel-permissions
@@ -391,8 +381,8 @@ sptr<const json> render_payload() override {
 #define Class EditChannelPermissionsCall
 #define function editChannelPermissions
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, overwrite_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, overwrite_id, USEDBY(target))
 NEW_FIELD(std::string, allow, USEDBY(payload))
 NEW_FIELD(std::string, deny, USEDBY(payload))
 NEW_FIELD(int, permission_type, USEDBY(payload))
@@ -437,7 +427,7 @@ sptr<const json> render_payload() override {
 #define Class GetChannelInvitesCall
 #define function getChannelInvites
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -460,7 +450,7 @@ sptr<const std::string> render_target() override {
 #define Class CreateChannelInviteCall
 #define function createChannelInvite
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(int, max_age, USEDBY(payload))
 NEW_FIELD(int, max_uses, USEDBY(payload))
 NEW_FIELD(bool, temporary, USEDBY(payload))
@@ -513,8 +503,8 @@ sptr<const json> render_payload() override {
 #define Class DeleteChannelPermissionCall
 #define function deleteChannelPermissions
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, overwrite_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, overwrite_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -541,8 +531,8 @@ sptr<const std::string> render_target() override {
 #define Class FollowNewsChannelCall
 #define function followNewsChannel
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, webhook_channel_id, USEDBY(payload))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, webhook_channel_id, USEDBY(payload))
 STATIC_FIELD(std::string, method, "POST")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -576,7 +566,7 @@ sptr<const json> render_payload() override {
 #define Class TriggerTypingIndicatorCall
 #define function triggerTypingIndicator
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "POST")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -599,7 +589,7 @@ sptr<const std::string> render_target() override {
 #define Class GetPinnedMessagesCall
 #define function getPinnedMessages
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -622,8 +612,8 @@ sptr<const std::string> render_target() override {
 #define Class AddPinnedChannelMessageCall
 #define function addPinnedChannelMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -649,8 +639,8 @@ sptr<const std::string> render_target() override {
 #define Class DeletePinnedChannelMessageCall
 #define function deletePinnedChannelMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -676,8 +666,8 @@ sptr<const std::string> render_target() override {
 #define Class AddGroupDMRecipientCall
 #define function addGroupDMRecipient
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 NEW_FIELD(std::string, access_token, USEDBY(payload))
 NEW_FIELD(std::string, nick, USEDBY(payload))
 STATIC_FIELD(std::string, method, "PUT")
@@ -718,8 +708,8 @@ sptr<const json> render_payload() override {
 #define Class RemoveGroupDMRecipientCall
 #define function removeGroupDMRecipient
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -745,8 +735,8 @@ sptr<const std::string> render_target() override {
 #define Class StartThreadWithMessageCall
 #define function startThreadWithMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(int, auto_archive_duration, USEDBY(payload))
 STATIC_FIELD(std::string, method, "POST")
@@ -763,7 +753,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class StartThreadWithoutMessageCall
 #define function startThreadWithoutMessage, startThreadWoutMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(int, auto_archive_duration, USEDBY(payload))
 NEW_FIELD(ChannelType, thread_type, USEDBY(payload))
@@ -782,7 +772,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class JoinThreadCall
 #define function joinThread
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -798,8 +788,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class AddThreadMemberCall
 #define function addThreadMember
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )
 HIDE_FIELD(type)
@@ -815,7 +805,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class LeaveThreadCall
 #define function leaveThread
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -831,8 +821,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class RemoveThreadMemberCall
 #define function removeThreadMember
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
-NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )
 HIDE_FIELD(type)
@@ -848,7 +838,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ListThreadMembersCall
 #define function listThreadMembers
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/channels/{}/thread-members", ARR(channel_id), )
 HIDE_FIELD(type)
@@ -864,7 +854,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ListPublicArchivedThreadsCall
 #define function listPublicArchivedThreads
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, before, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
@@ -883,7 +873,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ListPrivateArchivedThreadsCall
 #define function listPrivateArchivedThreads
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, before, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
@@ -902,7 +892,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class ListJoinedPrivateArchivedThreadsCall
 #define function listJoinedPrivateArchivedThreads
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(Snowflake, channel_id, USEDBY(target))
 NEW_FIELD(std::string, before, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")

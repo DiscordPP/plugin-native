@@ -20,7 +20,7 @@
 #define Class GetGlobalApplicationCommandsCall
 #define function getGlobalApplicationCommands, getGlobalCommands
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/applications/{}/commands", ARR(application_id), )
 HIDE_FIELD(type)
@@ -36,7 +36,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateGlobalApplicationCommandCall
 #define function createGlobalApplicationCommand, createGlobalCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::string, description, USEDBY(payload))
 NEW_FIELD(std::vector<json>, options, USEDBY(payload))
@@ -57,8 +57,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetGlobalApplicationCommandCall
 #define function getGlobalApplicationCommand, getGlobalCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/applications/{}/command/{}", ARR(application_id, command_id), )
 HIDE_FIELD(type)
@@ -74,8 +74,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class EditGlobalApplicationCommandCall
 #define function editGlobalApplicationCommand, editGlobalCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::string, description, USEDBY(payload))
 NEW_FIELD(std::vector<json>, options, USEDBY(payload))
@@ -94,8 +94,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteGlobalApplicationCommandCall
 #define function deleteGlobalApplicationCommand, deleteGlobalCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/applications/{}/command/{}", ARR(application_id, command_id), )
 HIDE_FIELD(type)
@@ -112,7 +112,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define function                                                               \
     bulkOverwriteGlobalApplicationCommands, bulkOverwriteGlobalCommands
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/applications/{}/commands", ARR(application_id), )
 HIDE_FIELD(type)
@@ -128,8 +128,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetGuildApplicationCommandsCall
 #define function getGuildApplicationCommands, getGuildCommands
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/applications/{}/guilds/{}/commands",
             ARR(application_id, guild_id), )
@@ -148,8 +148,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateGuildApplicationCommandCall
 #define function createGuildApplicationCommand, createGuildCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::string, description, USEDBY(payload))
 NEW_FIELD(std::vector<json>, options, USEDBY(payload))
@@ -171,9 +171,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetGuildApplicationCommandCall
 #define function getGuildApplicationCommand, getGuildCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/applications/{}/guilds/{}/command/{}",
             ARR(application_id, guild_id, command_id), )
@@ -190,9 +190,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class EditGuildApplicationCommandCall
 #define function editGuildApplicationCommand, editGuildCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::string, description, USEDBY(payload))
 NEW_FIELD(std::vector<json>, options, USEDBY(payload))
@@ -212,9 +212,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteGuildApplicationCommandCall
 #define function deleteGuildApplicationCommand, deleteGuildCommand
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/applications/{}/guilds/{}/command/{}",
             ARR(application_id, guild_id, command_id), )
@@ -232,8 +232,8 @@ FORWARD_FIELD(handleRead, onRead, )
 #define function                                                               \
     bulkOverwriteGuildApplicationCommands, bulkOverwriteGuildCommands
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/applications/{}/guilds/{}/commands",
             ARR(application_id, guild_id), )
@@ -252,8 +252,8 @@ FORWARD_FIELD(handleRead, onRead, )
     getGuildApplicationCommandPermissions, getGuildCommandPermissions,         \
         getGuildCommandPerms
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/applications/{}/guilds/{}/commands/permissions",
             ARR(application_id, guild_id), )
@@ -271,9 +271,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define function                                                               \
     getApplicationCommandPermissions, getCommandPermissions, getCommandPerms
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/applications/{}/guilds/{}/command/{}/permissions",
             ARR(application_id, guild_id, command_id), )
@@ -291,9 +291,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define function                                                               \
     editApplicationCommandPermissions, editCommandPermissions, editCommandPerms
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, command_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, command_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::vector<json>, permissions, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/applications/{}/guilds/{}/command/{}/permissions",
@@ -312,8 +312,8 @@ FORWARD_FIELD(handleRead, onRead, )
     batchEditApplicationCommandPermissions, batchEditCommandPermissions,       \
         batchEditCommandPerms
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/applications/{}/guilds/{}/commands/permissions",
             ARR(application_id, guild_id), )

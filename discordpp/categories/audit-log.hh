@@ -20,10 +20,10 @@
 #define Class GetGuildAuditLogCall
 #define function getGuildAuditLog
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, user_id, USEDBY(target))
 NEW_FIELD(AuditLogEvent, action_type, USEDBY(target))
-NEW_FIELD(snowflake, before, USEDBY(target))
+NEW_FIELD(Snowflake, before, USEDBY(target))
 NEW_FIELD(int, limit, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/audit-logs", ARR(guild_id),

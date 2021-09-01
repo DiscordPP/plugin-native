@@ -53,7 +53,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetGuildTemplatesCall
 #define function getGuildTemplates
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/guilds/{}/templates", ARR(guild_id), )
 HIDE_FIELD(type)
@@ -86,7 +86,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class SyncGuildTemplateCall
 #define function syncGuildTemplate
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, template_code, USEDBY(target))
 STATIC_FIELD(std::string, method, "PUT")
 AUTO_TARGET("/guilds/{}/templates/{}", ARR(guild_id, template_code), )
@@ -121,7 +121,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteGuildTemplateCall
 #define function deleteGuildTemplate
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, template_code, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/guilds/{}/templates/{}", ARR(guild_id, template_code), )

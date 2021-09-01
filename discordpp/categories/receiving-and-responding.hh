@@ -23,7 +23,7 @@
 #define Class CreateInteractionResponseCall
 #define function createInteractionResponse, createResponse
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, interaction_id, USEDBY(target))
+NEW_FIELD(Snowflake, interaction_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
 NEW_FIELD(InteractionCallbackType, interaction_type, USEDBY(payload))
 NEW_FIELD(json, data, USEDBY(payload))
@@ -45,7 +45,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetOriginalInteractionResponseCall
 #define function getOriginalInteractionResponse, getOriginalResponse
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/webhooks/{}/{}/messages/@original",
@@ -66,7 +66,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class deleteOriginalInteractionResponseCall
 #define function deleteOriginalInteractionResponse, deleteOriginalResponse
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/webhooks/{}/{}/messages/@original",
@@ -84,7 +84,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class CreateFollowupMessageCall
 #define function createFollowupMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
 NEW_FIELD(std::string, content, USEDBY(payload))
 NEW_FIELD(std::string, username, USEDBY(payload))
@@ -112,9 +112,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class GetFollowupMessageCall
 #define function getFollowupMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/webhooks/{}/{}/messages/{}",
             ARR(application_id, interaction_token, message_id), )
@@ -131,9 +131,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class editFollowupMessageCall
 #define function editFollowupMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 NEW_FIELD(std::string, content, USEDBY(payload))
 NEW_FIELD(std::vector<json>, embeds, USEDBY(payload))
 NEW_FIELD(json, allowed_mentions, USEDBY(payload))
@@ -156,9 +156,9 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Class DeleteFollowupMessageCall
 #define function deleteFollowupMessage
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, application_id, USEDBY(target))
+NEW_FIELD(Snowflake, application_id, USEDBY(target))
 NEW_FIELD(std::string, interaction_token, USEDBY(target))
-NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(Snowflake, message_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 AUTO_TARGET("/webhooks/{}/{}/messages/{}",
             ARR(application_id, interaction_token, message_id), )

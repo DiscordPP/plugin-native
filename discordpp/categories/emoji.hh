@@ -20,7 +20,7 @@
 #define Class ListGuildEmojisCall
 #define function listGuildEmojis
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -43,8 +43,8 @@ sptr<const std::string> render_target() override {
 #define Class GetGuildEmojiCall
 #define function getGuildEmoji
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
-NEW_FIELD(snowflake, emoji_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, emoji_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
@@ -70,15 +70,13 @@ sptr<const std::string> render_target() override {
 #define Class CreateGuildEmojiCall
 #define function createGuildEmoji
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
 NEW_FIELD(std::string, image, USEDBY(payload))
-NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))
+NEW_FIELD(std::vector<Snowflake>, roles, USEDBY(payload))
 STATIC_FIELD(std::string, method, "POST")
 HIDE_FIELD(target)
-HIDE_FIELD(type)
-HIDE_FIELD(body)
-HIDE_FIELD(payload)
+AUTO_PAYLOAD(PFR(name) PFR(image) PFO(roles))
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 protected:
@@ -87,26 +85,6 @@ sptr<const std::string> render_target() override {
         throw std::logic_error("Create Guild Emoji needs a Guild ID");
     return std::make_shared<const std::string>(
         "/guilds/" + std::to_string(*_guild_id) + "/emojis");
-}
-sptr<const json> render_payload() override {
-    json out;
-
-    if (!_name)
-        throw std::logic_error("Create Guild Emoji needs a Name");
-    out["name"] = *_name;
-
-    if (!_image)
-        throw std::logic_error("Create Guild Emoji need Image Data");
-    out["image"] = *_image;
-
-    if (_roles) {
-        json roles = json::array();
-        for (snowflake role : *_roles)
-            roles.push_back(std::to_string(role));
-        out["roles"] = roles;
-    }
-
-    return std::make_shared<const json>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
 
@@ -117,15 +95,13 @@ sptr<const json> render_payload() override {
 #define Class ModifyGuildEmojiCall
 #define function modifyGuildEmoji
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
-NEW_FIELD(snowflake, emoji_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, emoji_id, USEDBY(target))
 NEW_FIELD(std::string, name, USEDBY(payload))
-NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))
+NEW_FIELD(std::vector<Snowflake>, roles, USEDBY(payload))
 STATIC_FIELD(std::string, method, "PATCH")
 HIDE_FIELD(target)
-HIDE_FIELD(type)
-HIDE_FIELD(body)
-HIDE_FIELD(payload)
+AUTO_PAYLOAD(PFR(name) PFO(roles))
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 protected:
@@ -138,22 +114,6 @@ sptr<const std::string> render_target() override {
         "/guilds/" + std::to_string(*_guild_id) + "/emojis/" +
         std::to_string(*_emoji_id));
 }
-sptr<const json> render_payload() override {
-    json out;
-
-    if (!_name)
-        throw std::logic_error("Create Guild Emoji needs a Name");
-    out["name"] = *_name;
-
-    if (_roles) {
-        json roles = json::array();
-        for (snowflake role : *_roles)
-            roles.push_back(std::to_string(role));
-        out["roles"] = roles;
-    }
-
-    return std::make_shared<const json>(std::move(out));
-}
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/emoji#delete-guild-emoji
@@ -163,8 +123,8 @@ sptr<const json> render_payload() override {
 #define Class DeleteGuildEmojiCall
 #define function deleteGuildEmoji
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
-NEW_FIELD(snowflake, emoji_id, USEDBY(target))
+NEW_FIELD(Snowflake, guild_id, USEDBY(target))
+NEW_FIELD(Snowflake, emoji_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "DELETE")
 HIDE_FIELD(target)
 HIDE_FIELD(type)
