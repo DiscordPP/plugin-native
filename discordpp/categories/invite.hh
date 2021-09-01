@@ -13,21 +13,35 @@
 #error This header should only be included in plugin-endpoints.hh
 #endif
 
-// https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
+// https://discord.com/developers/docs/resources/invite#get-invite
 // TODO unverified
 #define Bot PluginEndpoints
 #define Parent Call
-#define Class GetGuildAuditLogCall
-#define function getGuildAuditLog
+#define Class GetInviteCall
+#define function getInvite
 #include <discordpp/macros/defineCallOpen.hh>
-NEW_FIELD(snowflake, guild_id, USEDBY(target))
-NEW_FIELD(std::string, user_id, USEDBY(target))
-NEW_FIELD(AuditLogEvent, action_type, USEDBY(target))
-NEW_FIELD(snowflake, before, USEDBY(target))
-NEW_FIELD(int, limit, USEDBY(target))
+NEW_FIELD(std::string, invite_code, USEDBY(target))
+NEW_FIELD(bool, with_counts, USEDBY(target))
+NEW_FIELD(bool, with_expiration, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
-AUTO_TARGET("/guilds/{}/audit-logs", ARR(guild_id),
-            QSO(user_id) QSO(action_type) QSO(before) QSO(limit))
+AUTO_TARGET("/invites/{}", ARR(invite_code),
+            QSO(with_counts) QSO(with_expiration))
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+#include <discordpp/macros/defineCallClose.hh>
+
+// https://discord.com/developers/docs/resources/invite#delete-invite
+// TODO unverified
+#define Bot PluginEndpoints
+#define Parent Call
+#define Class DeleteInviteCall
+#define function deleteInvite
+#include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(std::string, invite_code, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+AUTO_TARGET("/invites/{}", ARR(invite_code), )
 HIDE_FIELD(type)
 HIDE_FIELD(body)
 FORWARD_FIELD(handleWrite, onWrite, )

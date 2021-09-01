@@ -39,8 +39,11 @@ template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #include "categories/audit-log.hh"
 #include "categories/channel.hh"
 #include "categories/emoji.hh"
+#include "categories/guild-template.hh"
 #include "categories/guild.hh"
+#include "categories/invite.hh"
 #include "categories/receiving-and-responding.hh"
+#include "categories/stage-instance.hh"
 #include "categories/user.hh"
 #include "categories/webhook.hh"
 
