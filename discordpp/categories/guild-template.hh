@@ -85,7 +85,6 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Parent Call
 #define Class SyncGuildTemplateCall
 #define function syncGuildTemplate
-#define Fields
 #include <discordpp/macros/defineCallOpen.hh>
 NEW_FIELD(snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, template_code, USEDBY(target))

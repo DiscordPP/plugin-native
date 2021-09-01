@@ -19,15 +19,13 @@
 #define Parent Call
 #define Class GetCurrentUserCall
 #define function getCurrentUser, getSelf
-#define Fields                                                                 \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    STATIC_FIELD(std::string, target, "/users/@me")                            \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+STATIC_FIELD(std::string, method, "GET")
+STATIC_FIELD(std::string, target, "/users/@me")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#get-user
@@ -36,22 +34,15 @@
 #define Parent Call
 #define Class GetUserCall
 #define function getUser
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_user_id)
-        throw std::logic_error("Get User needs an ID");
-    return std::make_shared<const std::string>("/users/" +
-                                               std::to_string(*_user_id));
-}
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/users/{}", ARR(user_id), )
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#modify-current-user
@@ -60,31 +51,17 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class ModifyCurrentUserCall
 #define function modifyCurrentUser, modifySelf
-#define Fields                                                                 \
-    NEW_FIELD(std::string, username, USEDBY(payload))                          \
-    NEW_FIELD(std::string, avatar, USEDBY(payload))                            \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    STATIC_FIELD(std::string, target, "/users/@me")                            \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const json> render_payload() override {
-    json out;
-
-    if (_username) {
-        out["username"] = *_username;
-    }
-
-    if (_avatar) {
-        out["avatar"] = *_avatar;
-    }
-
-    return std::make_shared<const json>(std::move(out));
-}
+NEW_FIELD(std::string, username, USEDBY(payload))
+NEW_FIELD(std::string, avatar, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+STATIC_FIELD(std::string, target, "/users/@me")
+AUTO_PAYLOAD(PFO(username) PFO(avatar))
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#get-current-user-guilds
@@ -93,20 +70,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class GetCurrentUserGuildsCall
 #define function getCurrentUserGuilds, getOwnGuilds
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, before, USEDBY(target))                               \
-    NEW_FIELD(snowflake, after, USEDBY(target))                                \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, before, USEDBY(target))
+NEW_FIELD(snowflake, after, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
 protected:
 sptr<const std::string> render_target() override {
-    std::string out = "/users/@me/guilds";
+    std::string out = "/users";
     bool first = true;
     if (_before) {
         out += fmt::format("{}before={}", first ? "?" : "&", *_before);
@@ -119,9 +91,13 @@ sptr<const std::string> render_target() override {
     if (_limit) {
         out += fmt::format("{}limit={}", first ? "?" : "&", *_limit);
         first = false;
-    }
-    return std::make_shared<const std::string>(std::move(out));
+    };
+    return std::make_shared<const std::string>(out);
 }
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#leave-guild
@@ -130,23 +106,14 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class LeaveGuildCall
 #define function leaveGuild
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_guild_id) {
-        throw std::logic_error("Get Reactions needs a Guild ID");
-    }
-    return std::make_shared<const std::string>(
-        fmt::format("/users/@me/guilds/{}", *_guild_id));
-}
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+AUTO_TARGET("/users/{}", ARR(guild_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#create-dm
@@ -155,24 +122,13 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class CreateDMCall
 #define function createDM
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, recipient_id, USEDBY(payload))                        \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    STATIC_FIELD(std::string, target, "/users/@me/channels")                   \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const json> render_payload() override {
-    if (!_recipient_id) {
-        throw std::logic_error("Create DM needs a Recipient ID");
-    }
-    json out({{"recipient_id", std::to_string(*_recipient_id)}});
-    return std::make_shared<const json>(std::move(out));
-}
+NEW_FIELD(snowflake, recipient_id, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+STATIC_FIELD(std::string, target, "/users/@me/channels")
+AUTO_PAYLOAD(PFR(recipient_id))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#create-group-dm
@@ -182,18 +138,18 @@ sptr<const json> render_payload() override {
 #define Parent JsonCall
 #define Class CreateGroupDMCall
 #define function createGroupDM
-#define COMMA ,
-#define Fields                                                                 \
-    NEW_FIELD(std::vector<std::string>, access_tokens, USEDBY(payload))        \
-    NEW_FIELD(std::map<snowflake COMMA std::string>, nicks, USEDBY(payload))   \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    STATIC_FIELD(std::string, target, "/users/@me/channels")                   \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(std::vector<std::string>, access_tokens, USEDBY(payload))
+#define COMMA ,
+NEW_FIELD(std::map<snowflake COMMA std::string>, nicks, USEDBY(payload))
+#undef COMMA
+STATIC_FIELD(std::string, method, "POST")
+STATIC_FIELD(std::string, target, "/users/@me/channels")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const json> render_payload() override {
     if (!_access_tokens) {
@@ -210,7 +166,6 @@ sptr<const json> render_payload() override {
     return std::make_shared<const json>(std::move(out));
 }
 #include <discordpp/macros/defineCallClose.hh>
-#undef COMMA
 
 // https://discord.com/developers/docs/resources/user#get-user-connections
 // TODO unverified
@@ -219,13 +174,11 @@ sptr<const json> render_payload() override {
 #define Class GetUserConnectionsCall
 #define function                                                               \
     getUserConnections, getCurrentUserConnections, getOwnConnections
-#define Fields                                                                 \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    STATIC_FIELD(std::string, target, "/users/@me/connections")                \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+STATIC_FIELD(std::string, method, "GET")
+STATIC_FIELD(std::string, target, "/users/@me/connections")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>

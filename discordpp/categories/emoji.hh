@@ -19,15 +19,14 @@
 #define Parent Call
 #define Class ListGuildEmojisCall
 #define function listGuildEmojis
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id)
@@ -43,16 +42,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetGuildEmojiCall
 #define function getGuildEmoji
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, emoji_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, emoji_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id)
@@ -71,19 +69,18 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class CreateGuildEmojiCall
 #define function createGuildEmoji
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(std::string, image, USEDBY(payload))                             \
-    NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))                  \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(std::string, image, USEDBY(payload))
+NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id)
@@ -119,19 +116,18 @@ sptr<const json> render_payload() override {
 #define Parent JsonCall
 #define Class ModifyGuildEmojiCall
 #define function modifyGuildEmoji
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, emoji_id, USEDBY(target))                             \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))                  \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, emoji_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id)
@@ -166,16 +162,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class DeleteGuildEmojiCall
 #define function deleteGuildEmoji
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, emoji_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, emoji_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id)

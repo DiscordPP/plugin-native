@@ -19,22 +19,14 @@
 #define Parent Call
 #define Class GetChannelCall
 #define function getChannel
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_channel_id)
-        throw std::logic_error("Get Channel needs an ID");
-    return std::make_shared<const std::string>("/channels/" +
-                                               std::to_string(*_channel_id));
-}
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/channels/{}", ARR(channel_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#modify-channel
@@ -43,66 +35,25 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class ModifyChannelCall
 #define function modifyChannel
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(int, channel_type, USEDBY(payload))                              \
-    NEW_FIELD(int, position, USEDBY(payload))                                  \
-    NEW_FIELD(std::string, topic, USEDBY(payload))                             \
-    NEW_FIELD(bool, nsfw, USEDBY(payload))                                     \
-    NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))                       \
-    NEW_FIELD(int, bitrate, USEDBY(payload))                                   \
-    NEW_FIELD(int, user_limit, USEDBY(payload))                                \
-    NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))       \
-    NEW_FIELD(snowflake, parent_id, USEDBY(payload))                           \
-    HIDE_FIELD(payload)                                                        \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(target)                                                         \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_channel_id) {
-        throw std::logic_error("Modify Channel needs an ID");
-    }
-    return std::make_shared<const std::string>("/channels/" +
-                                               std::to_string(*_channel_id));
-}
-sptr<const json> render_payload() override {
-    json out;
-
-    out["name"] = *_name;
-
-    if (_channel_type)
-        out["type"] = *_channel_type;
-
-    if (_position)
-        out["position"] = *_position;
-
-    if (_topic)
-        out["topic"] = *_topic;
-
-    if (_nsfw)
-        out["nsfw"] = *_nsfw;
-
-    if (_rate_limit_per_user)
-        out["rate_limit_per_user"] = *_rate_limit_per_user;
-
-    if (_bitrate)
-        out["bitrate"] = *_bitrate;
-
-    if (_user_limit)
-        out["user_limit"] = *_user_limit;
-
-    if (_permission_overwrites)
-        out["permission_overwrites"] = *_permission_overwrites;
-
-    if (_parent_id)
-        out["parent_id"] = std::to_string(*_parent_id);
-
-    return std::make_shared<const json>(std::move(out));
-}
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(int, channel_type, USEDBY(payload))
+NEW_FIELD(int, position, USEDBY(payload))
+NEW_FIELD(std::string, topic, USEDBY(payload))
+NEW_FIELD(bool, nsfw, USEDBY(payload))
+NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))
+NEW_FIELD(int, bitrate, USEDBY(payload))
+NEW_FIELD(int, user_limit, USEDBY(payload))
+NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))
+NEW_FIELD(snowflake, parent_id, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+AUTO_TARGET("/channels/{}", ARR(channel_id), )
+AUTO_PAYLOAD(PFO(name) PFO(channel_type) PFO(position) PFO(topic) PFO(nsfw)
+                 PFO(rate_limit_per_user) PFO(bitrate) PFO(user_limit)
+                     PFO(permission_overwrites) PFO(parent_id))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#deleteclose-channel
@@ -111,22 +62,14 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class DeleteChannelCall
 #define function deleteChannel, closeChannel
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
-    if (!_channel_id)
-        throw std::logic_error("Delete/Close Channel needs an ID");
-    return std::make_shared<const std::string>("/channels/" +
-                                               std::to_string(*_channel_id));
-}
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+AUTO_TARGET("/channels/{}", ARR(channel_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#get-channel-messages
@@ -135,17 +78,16 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetChannelMessagesCall
 #define function getChannelMessages
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, around, USEDBY(target))                               \
-    NEW_FIELD(snowflake, before, USEDBY(target))                               \
-    NEW_FIELD(snowflake, after, USEDBY(target))                                \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, around, USEDBY(target))
+NEW_FIELD(snowflake, before, USEDBY(target))
+NEW_FIELD(snowflake, after, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id) {
@@ -180,16 +122,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetChannelMessageCall
 #define function getChannelMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -235,17 +176,17 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Parent Call
 #define Class CrosspostMessageCall
 #define function crosspostMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-    protected : sptr<const std::string> render_target() override {
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "POST")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
+protected:
+sptr<const std::string> render_target() override {
     if (!_channel_id)
         throw std::logic_error("Crosspost Message needs a Channel ID");
     if (!_message_id)
@@ -262,17 +203,16 @@ FORWARD_FIELD(handleRead, onRead, )
 #define Parent Call
 #define Class CreateReactionCall
 #define function createReaction
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(std::string, emoji, USEDBY(target))
+STATIC_FIELD(std::string, method, "PUT")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -295,18 +235,17 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class DeleteOwnReactionCall
 #define function deleteOwnReaction
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(std::string, emoji, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -329,20 +268,19 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetReactionsCall
 #define function getReactions
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
-    NEW_FIELD(snowflake, before, USEDBY(target))                               \
-    NEW_FIELD(snowflake, after, USEDBY(target))                                \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(std::string, emoji, USEDBY(target))
+NEW_FIELD(snowflake, before, USEDBY(target))
+NEW_FIELD(snowflake, after, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -374,17 +312,16 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class DeleteAllReactionsCall
 #define function deleteAllReactions
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, emoji, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(std::string, emoji, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -406,21 +343,20 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class EditMessageCall
 #define function editMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, content, USEDBY(payload))                           \
-    NEW_FIELD(json, embed, USEDBY(payload))                                    \
-    NEW_FIELD(int, flags, USEDBY(payload))                                     \
-    NEW_FIELD(json, allowed_mentions, USEDBY(payload))                         \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(std::string, content, USEDBY(payload))
+NEW_FIELD(json, embed, USEDBY(payload))
+NEW_FIELD(int, flags, USEDBY(payload))
+NEW_FIELD(json, allowed_mentions, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -456,16 +392,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class DeleteMessageCall
 #define function deleteMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -484,17 +419,16 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class BulkDeleteMessagesCall
 #define function bulkDeleteMessages
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::vector<snowflake>, messages, USEDBY(payload))               \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::vector<snowflake>, messages, USEDBY(payload))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -520,20 +454,19 @@ sptr<const json> render_payload() override {
 #define Parent JsonCall
 #define Class EditChannelPermissionsCall
 #define function editChannelPermissions
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, overwrite_id, USEDBY(target))                         \
-    NEW_FIELD(std::string, allow, USEDBY(payload))                             \
-    NEW_FIELD(std::string, deny, USEDBY(payload))                              \
-    NEW_FIELD(int, permission_type, USEDBY(payload))                           \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, overwrite_id, USEDBY(target))
+NEW_FIELD(std::string, allow, USEDBY(payload))
+NEW_FIELD(std::string, deny, USEDBY(payload))
+NEW_FIELD(int, permission_type, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PUT")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -567,15 +500,14 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class GetChannelInvitesCall
 #define function getChannelInvites
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -591,22 +523,21 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class CreateChannelInviteCall
 #define function createChannelInvite
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(int, max_age, USEDBY(payload))                                   \
-    NEW_FIELD(int, max_uses, USEDBY(payload))                                  \
-    NEW_FIELD(bool, temporary, USEDBY(payload))                                \
-    NEW_FIELD(bool, unique, USEDBY(payload))                                   \
-    NEW_FIELD(std::string, target_user, USEDBY(payload))                       \
-    NEW_FIELD(int, target_user_type, USEDBY(payload))                          \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(int, max_age, USEDBY(payload))
+NEW_FIELD(int, max_uses, USEDBY(payload))
+NEW_FIELD(bool, temporary, USEDBY(payload))
+NEW_FIELD(bool, unique, USEDBY(payload))
+NEW_FIELD(std::string, target_user, USEDBY(payload))
+NEW_FIELD(int, target_user_type, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PUT")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -645,16 +576,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class DeleteChannelPermissionCall
 #define function deleteChannelPermissions
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, overwrite_id, USEDBY(target))                         \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, overwrite_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -674,17 +604,16 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class FollowNewsChannelCall
 #define function followNewsChannel
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, webhook_channel_id, USEDBY(payload))                  \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, webhook_channel_id, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -710,15 +639,14 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class TriggerTypingIndicatorCall
 #define function triggerTypingIndicator
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "POST")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -734,15 +662,14 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetPinnedMessagesCall
 #define function getPinnedMessages
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -758,16 +685,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class AddPinnedChannelMessageCall
 #define function addPinnedChannelMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "PUT")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -786,16 +712,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class DeletePinnedChannelMessageCall
 #define function deletePinnedChannelMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -814,19 +739,18 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class AddGroupDMRecipientCall
 #define function addGroupDMRecipient
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    NEW_FIELD(std::string, access_token, USEDBY(payload))                      \
-    NEW_FIELD(std::string, nick, USEDBY(payload))                              \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(std::string, access_token, USEDBY(payload))
+NEW_FIELD(std::string, nick, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PUT")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -857,16 +781,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class RemoveGroupDMRecipientCall
 #define function removeGroupDMRecipient
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_channel_id)
@@ -885,19 +808,16 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class StartThreadWithMessageCall
 #define function startThreadWithMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, message_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(int, auto_archive_duration, USEDBY(payload))                     \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/channels/{}/messages/{}/threads",                            \
-                ARR(channel_id, message_id), )                                 \
-    AUTO_PAYLOAD(PFR(name) PFR(auto_archive_duration))                         \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, message_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(int, auto_archive_duration, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/channels/{}/messages/{}/threads", ARR(channel_id, message_id), )
+AUTO_PAYLOAD(PFR(name) PFR(auto_archive_duration))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#start-thread-without-message
@@ -906,19 +826,17 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class StartThreadWithoutMessageCall
 #define function startThreadWithoutMessage, startThreadWoutMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(int, auto_archive_duration, USEDBY(payload))                     \
-    NEW_FIELD(ChannelType, thread_type, USEDBY(payload))                       \
-    NEW_FIELD(bool, invitable, USEDBY(payload))                                \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/channels/{}/threads", ARR(channel_id), )                     \
-    AUTO_PAYLOAD(PFR(name) PFR(auto_archive_duration))                         \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(int, auto_archive_duration, USEDBY(payload))
+NEW_FIELD(ChannelType, thread_type, USEDBY(payload))
+NEW_FIELD(bool, invitable, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/channels/{}/threads", ARR(channel_id), )
+AUTO_PAYLOAD(PFR(name) PFR(auto_archive_duration))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#join-thread
@@ -927,16 +845,14 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class JoinThreadCall
 #define function joinThread
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )          \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "PUT")
+AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#add-thread-member
@@ -945,17 +861,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class AddThreadMemberCall
 #define function addThreadMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )  \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "PUT")
+AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#leave-thread
@@ -964,16 +878,14 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class LeaveThreadCall
 #define function leaveThread
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )          \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+AUTO_TARGET("/channels/{}/thread-members/@me", ARR(channel_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#remove-thread-member
@@ -982,17 +894,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class RemoveThreadMemberCall
 #define function removeThreadMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )  \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+AUTO_TARGET("/channels/{}/thread-members/{}", ARR(channel_id, user_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#list-thread-members
@@ -1001,20 +911,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class ListThreadMembersCall
 #define function listThreadMembers
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/channels/{}/thread-members", ARR(channel_id), )              \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/channels/{}/thread-members", ARR(channel_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
-
-// https://discord.com/developers/docs/resources/channel#list-active-threads
-//  DEPRECATED
 
 // https://discord.com/developers/docs/resources/channel#list-public-archived-threads
 //  TODO unverified
@@ -1022,19 +927,17 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class ListPublicArchivedThreadsCall
 #define function listPublicArchivedThreads
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, before, USEDBY(target))                             \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/channels/{}/threads/archived/public", ARR(channel_id),       \
-                QSO(before) QSO(limit))                                        \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::string, before, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/channels/{}/threads/archived/public", ARR(channel_id),
+            QSO(before) QSO(limit))
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#list-private-archived-threads
@@ -1043,19 +946,17 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class ListPrivateArchivedThreadsCall
 #define function listPrivateArchivedThreads
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, before, USEDBY(target))                             \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/channels/{}/threads/archived/private", ARR(channel_id),      \
-                QSO(before) QSO(limit))                                        \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::string, before, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/channels/{}/threads/archived/private", ARR(channel_id),
+            QSO(before) QSO(limit))
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
@@ -1064,17 +965,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class ListJoinedPrivateArchivedThreadsCall
 #define function listJoinedPrivateArchivedThreads
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, before, USEDBY(target))                             \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/channels/{}/users/@me/threads/archived/private",             \
-                ARR(channel_id), QSO(before) QSO(limit))                       \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::string, before, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/channels/{}/users/@me/threads/archived/private", ARR(channel_id),
+            QSO(before) QSO(limit))
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>

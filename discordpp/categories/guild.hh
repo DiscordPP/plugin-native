@@ -19,27 +19,26 @@
 #define Parent JsonCall
 #define Class CreateGuildCall
 #define function createGuild
-#define Fields                                                                 \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(std::string, region, USEDBY(payload))                            \
-    NEW_FIELD(std::string, icon, USEDBY(payload))                              \
-    NEW_FIELD(int, verification_level, USEDBY(payload))                        \
-    NEW_FIELD(int, default_message_notifications, USEDBY(payload))             \
-    NEW_FIELD(int, explicit_content_filter, USEDBY(payload))                   \
-    NEW_FIELD(std::vector<json>, roles, USEDBY(payload))                       \
-    NEW_FIELD(std::vector<json>, channels, USEDBY(payload))                    \
-    NEW_FIELD(snowflake, afk_channel_id, USEDBY(payload))                      \
-    NEW_FIELD(int, afk_timeout, USEDBY(payload))                               \
-    NEW_FIELD(snowflake, system_channel_id, USEDBY(payload))                   \
-    NEW_FIELD(int, system_channel_flags, USEDBY(payload))                      \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    STATIC_FIELD(std::string, target, "/users/@me/channels")                   \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(std::string, region, USEDBY(payload))
+NEW_FIELD(std::string, icon, USEDBY(payload))
+NEW_FIELD(int, verification_level, USEDBY(payload))
+NEW_FIELD(int, default_message_notifications, USEDBY(payload))
+NEW_FIELD(int, explicit_content_filter, USEDBY(payload))
+NEW_FIELD(std::vector<json>, roles, USEDBY(payload))
+NEW_FIELD(std::vector<json>, channels, USEDBY(payload))
+NEW_FIELD(snowflake, afk_channel_id, USEDBY(payload))
+NEW_FIELD(int, afk_timeout, USEDBY(payload))
+NEW_FIELD(snowflake, system_channel_id, USEDBY(payload))
+NEW_FIELD(int, system_channel_flags, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+STATIC_FIELD(std::string, target, "/users/@me/channels")
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const json> render_payload() override {
     if (!_name) {
@@ -71,16 +70,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class GetGuildCall
 #define function getGuild
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(bool, with_counts, USEDBY(target))                               \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(bool, with_counts, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -103,35 +101,34 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class GetGuildPreviewCall
 #define function getGuildPreview
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(std::string, region, USEDBY(payload))                            \
-    NEW_FIELD(int, verification_level, USEDBY(payload))                        \
-    NEW_FIELD(int, default_message_notifications, USEDBY(payload))             \
-    NEW_FIELD(int, explicit_content_filter, USEDBY(payload))                   \
-    NEW_FIELD(snowflake, afk_channel_id, USEDBY(payload))                      \
-    NEW_FIELD(int, afk_timeout, USEDBY(payload))                               \
-    NEW_FIELD(std::string, icon, USEDBY(payload))                              \
-    NEW_FIELD(snowflake, owner_id, USEDBY(payload))                            \
-    NEW_FIELD(std::string, splash, USEDBY(payload))                            \
-    NEW_FIELD(std::string, discovery_splash, USEDBY(payload))                  \
-    NEW_FIELD(std::string, banner, USEDBY(payload))                            \
-    NEW_FIELD(snowflake, system_channel_id, USEDBY(payload))                   \
-    NEW_FIELD(int, system_channel_flags, USEDBY(payload))                      \
-    NEW_FIELD(snowflake, rules_channel_id, USEDBY(payload))                    \
-    NEW_FIELD(snowflake, public_updates_channel_id, USEDBY(payload))           \
-    NEW_FIELD(std::string, preferred_locale, USEDBY(payload))                  \
-    NEW_FIELD(std::vector<std::string>, features, USEDBY(payload))             \
-    NEW_FIELD(std::string, description, USEDBY(payload))                       \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(std::string, region, USEDBY(payload))
+NEW_FIELD(int, verification_level, USEDBY(payload))
+NEW_FIELD(int, default_message_notifications, USEDBY(payload))
+NEW_FIELD(int, explicit_content_filter, USEDBY(payload))
+NEW_FIELD(snowflake, afk_channel_id, USEDBY(payload))
+NEW_FIELD(int, afk_timeout, USEDBY(payload))
+NEW_FIELD(std::string, icon, USEDBY(payload))
+NEW_FIELD(snowflake, owner_id, USEDBY(payload))
+NEW_FIELD(std::string, splash, USEDBY(payload))
+NEW_FIELD(std::string, discovery_splash, USEDBY(payload))
+NEW_FIELD(std::string, banner, USEDBY(payload))
+NEW_FIELD(snowflake, system_channel_id, USEDBY(payload))
+NEW_FIELD(int, system_channel_flags, USEDBY(payload))
+NEW_FIELD(snowflake, rules_channel_id, USEDBY(payload))
+NEW_FIELD(snowflake, public_updates_channel_id, USEDBY(payload))
+NEW_FIELD(std::string, preferred_locale, USEDBY(payload))
+NEW_FIELD(std::vector<std::string>, features, USEDBY(payload))
+NEW_FIELD(std::string, description, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -210,15 +207,14 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class DeleteGuildCall
 #define function deleteGuild
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -235,15 +231,14 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetGuildChannelsCall
 #define function getGuildChannels
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -260,26 +255,25 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class CreateGuildChannelsCall
 #define function createGuildChannels
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(std::string, name, USEDBY(payload))                              \
-    NEW_FIELD(int, type, USEDBY(payload))                                      \
-    NEW_FIELD(std::string, topic, USEDBY(payload))                             \
-    NEW_FIELD(int, bitrate, USEDBY(payload))                                   \
-    NEW_FIELD(int, user_limit, USEDBY(payload))                                \
-    NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))                       \
-    NEW_FIELD(int, position, USEDBY(payload))                                  \
-    NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))       \
-    NEW_FIELD(snowflake, parent_id, USEDBY(payload))                           \
-    NEW_FIELD(bool, nsfw, USEDBY(payload))                                     \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::string, name, USEDBY(payload))
+NEW_FIELD(int, type, USEDBY(payload))
+NEW_FIELD(std::string, topic, USEDBY(payload))
+NEW_FIELD(int, bitrate, USEDBY(payload))
+NEW_FIELD(int, user_limit, USEDBY(payload))
+NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))
+NEW_FIELD(int, position, USEDBY(payload))
+NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))
+NEW_FIELD(snowflake, parent_id, USEDBY(payload))
+NEW_FIELD(bool, nsfw, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -350,20 +344,19 @@ sptr<const json> render_payload() override {
 #define Parent JsonCall
 #define Class ModifyGuildChannelPositionsCall
 #define function modifyGuildChannelPositions
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, id, USEDBY(payload))                                  \
-    NEW_FIELD(int, position, USEDBY(payload))                                  \
-    NEW_FIELD(bool, lock_permissions, USEDBY(payload))                         \
-    NEW_FIELD(snowflake, parent_id, USEDBY(payload))                           \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, id, USEDBY(payload))
+NEW_FIELD(int, position, USEDBY(payload))
+NEW_FIELD(bool, lock_permissions, USEDBY(payload))
+NEW_FIELD(snowflake, parent_id, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -398,16 +391,14 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class ListActiveThreadsCall
 #define function listActiveThreads
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/guilds/{guild.id}/threads/active", ARR(guild_id), )          \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/guilds/{guild.id}/threads/active", ARR(guild_id), )
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/guild#get-guild-member
@@ -416,16 +407,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class GetGuildMemberCall
 #define function getGuildMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -445,17 +435,16 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class ListGuildMembersCall
 #define function listGuildMembers
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    NEW_FIELD(snowflake, after, USEDBY(target))                                \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+NEW_FIELD(snowflake, after, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -481,19 +470,16 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class SearchGuildMembersCall
 #define function searchGuildMembers
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(std::string, query, USEDBY(target))                              \
-    NEW_FIELD(int, limit, USEDBY(target))                                      \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    AUTO_TARGET("/guilds/{}/members/search", ARR(guild_id),                    \
-                QSR(query) QSO(limit))                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::string, query, USEDBY(target))
+NEW_FIELD(int, limit, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+AUTO_TARGET("/guilds/{}/members/search", ARR(guild_id), QSR(query) QSO(limit))
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/guild#add-guild-member
@@ -502,19 +488,18 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class AddGuildMemberCall
 #define function addGuildMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    NEW_FIELD(std::string, access_token, USEDBY(payload))                      \
-    NEW_FIELD(std::string, nick, USEDBY(payload))                              \
-    NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))                  \
-    NEW_FIELD(bool, mute, USEDBY(payload))                                     \
-    NEW_FIELD(bool, deaf, USEDBY(payload))                                     \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    AUTO_TARGET("/guilds/{}/members/{}", ARR(guild_id, user_id), )             \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(std::string, access_token, USEDBY(payload))
+NEW_FIELD(std::string, nick, USEDBY(payload))
+NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))
+NEW_FIELD(bool, mute, USEDBY(payload))
+NEW_FIELD(bool, deaf, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PUT")
+AUTO_TARGET("/guilds/{}/members/{}", ARR(guild_id, user_id), )
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 sptr<const json> render_payload() override {
     json out;
     PFR(access_token);
@@ -536,22 +521,21 @@ sptr<const json> render_payload() override {
 #define Parent JsonCall
 #define Class ModifyGuildMemberCall
 #define function modifyGuildMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    NEW_FIELD(std::string, nick, USEDBY(payload))                              \
-    NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))                  \
-    NEW_FIELD(bool, mute, USEDBY(payload))                                     \
-    NEW_FIELD(bool, deaf, USEDBY(payload))                                     \
-    NEW_FIELD(snowflake, channel_id, USEDBY(payload))                          \
-    STATIC_FIELD(std::string, method, "PATCH")                                 \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(std::string, nick, USEDBY(payload))
+NEW_FIELD(std::vector<snowflake>, roles, USEDBY(payload))
+NEW_FIELD(bool, mute, USEDBY(payload))
+NEW_FIELD(bool, deaf, USEDBY(payload))
+NEW_FIELD(snowflake, channel_id, USEDBY(payload))
+STATIC_FIELD(std::string, method, "PATCH")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -592,16 +576,14 @@ sptr<const json> render_payload() override {
 #define Parent JsonCall
 #define Class ModifyCurrentUserNickCall
 #define function modifyCurrentUserNick
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(std::optional<std::string>, nick, USEDBY(payload))               \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/guilds/{}/members/@me/nick", ARR(guild_id), )                \
-    AUTO_PAYLOAD(PFO(nick))                                                    \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(std::optional<std::string>, nick, USEDBY(payload))
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/guilds/{}/members/@me/nick", ARR(guild_id), )
+AUTO_PAYLOAD(PFO(nick))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/guild#add-guild-member-role
@@ -610,17 +592,16 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class AddGuildMemberRoleCall
 #define function addGuildMemberRole
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    NEW_FIELD(snowflake, role_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "PUT")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(snowflake, role_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "PUT")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -643,17 +624,16 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class RemoveGuildMemberRoleCall
 #define function removeGuildMemberRole
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    NEW_FIELD(snowflake, role_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(snowflake, role_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -676,16 +656,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class RemoveGuildMemberCall
 #define function removeGuildMember, kickGuildMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -705,15 +684,14 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetGuildBansCall
 #define function getGuildBans, listGuildBans
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -730,16 +708,15 @@ sptr<const std::string> render_target() override {
 #define Parent Call
 #define Class GetGuildBanCall
 #define function getGuildBan
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -759,19 +736,18 @@ sptr<const std::string> render_target() override {
 #define Parent JsonCall
 #define Class CreateGuildBanCall
 #define function createGuildBan, banGuildUser
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    NEW_FIELD(int, delete_message_days, USEDBY(payload))                       \
-    NEW_FIELD(std::string, reason, USEDBY(payload))                            \
-    STATIC_FIELD(std::string, method, "GET")                                   \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    HIDE_FIELD(payload)                                                        \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+NEW_FIELD(int, delete_message_days, USEDBY(payload))
+NEW_FIELD(std::string, reason, USEDBY(payload))
+STATIC_FIELD(std::string, method, "GET")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+HIDE_FIELD(payload)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -801,16 +777,15 @@ sptr<const json> render_payload() override {
 #define Parent Call
 #define Class RemoveGuildBanCall
 #define function removeGuildBan, unbanGuildMember
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, guild_id, USEDBY(target))                             \
-    NEW_FIELD(snowflake, user_id, USEDBY(target))                              \
-    STATIC_FIELD(std::string, method, "DELETE")                                \
-    HIDE_FIELD(target)                                                         \
-    HIDE_FIELD(type)                                                           \
-    HIDE_FIELD(body)                                                           \
-    FORWARD_FIELD(handleWrite, onWrite, )                                      \
-    FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
+NEW_FIELD(snowflake, guild_id, USEDBY(target))
+NEW_FIELD(snowflake, user_id, USEDBY(target))
+STATIC_FIELD(std::string, method, "DELETE")
+HIDE_FIELD(target)
+HIDE_FIELD(type)
+HIDE_FIELD(body)
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 protected:
 sptr<const std::string> render_target() override {
     if (!_guild_id) {
@@ -1139,8 +1114,8 @@ FORWARD_FIELD(handleRead, onRead, )
 NEW_FIELD(snowflake, guild_id, USEDBY(target))
 NEW_FIELD(std::string, style, USEDBY(target))
 auto style(const WidgetStyleOptions &styleIn) {
-    static const char* strs[] = {"shield", "banner1", "banner2", "banner3",
-                                "banner4"};
+    static const char *strs[] = {"shield", "banner1", "banner2", "banner3",
+                                 "banner4"};
     return style(std::make_shared<std::string>(strs[styleIn]));
 }
 AUTO_TARGET("/guilds/{}/widget.png", ARR(guild_id), QSO(style))
