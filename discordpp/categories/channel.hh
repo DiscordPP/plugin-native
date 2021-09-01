@@ -210,24 +210,23 @@ sptr<const std::string> render_target() override {
 #define Parent FileCall
 #define Class CreateMessageCall
 #define function createMessage
-#define Fields                                                                 \
-    NEW_FIELD(snowflake, channel_id, USEDBY(target))                           \
-    NEW_FIELD(std::string, content, USEDBY(payload))                           \
-    NEW_FIELD(Nonce, nonce, USEDBY(payload))                                   \
-    NEW_FIELD(bool, tts, USEDBY(payload))                                      \
-    NEW_FIELD(std::vector<json>, embeds, USEDBY(payload))                                    \
-    NEW_FIELD(json, allowed_mentions, USEDBY(payload))                         \
-    NEW_FIELD(json, message_reference, USEDBY(payload))                        \
-    FORWARD_FIELD(std::string, filename, )                                     \
-    FORWARD_FIELD(std::string, filetype, )                                     \
-    FORWARD_FIELD(std::string, file, )                                         \
-    STATIC_FIELD(std::string, method, "POST")                                  \
-    AUTO_TARGET("/channels/{}/messages", ARR(channel_id), )                    \
-    AUTO_PAYLOAD(PFO(content) PFO(nonce) PFO(tts) PFO(embeds)                   \
-                     PFO(allowed_mentions) PFO(message_reference))             \
-    FORWARD_FIELD(handleWrite, onWrite, ) FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-// This line intentionally left blank
+NEW_FIELD(snowflake, channel_id, USEDBY(target))
+NEW_FIELD(std::string, content, USEDBY(payload))
+NEW_FIELD(Nonce, nonce, USEDBY(payload))
+NEW_FIELD(bool, tts, USEDBY(payload))
+NEW_FIELD(std::vector<json>, embeds, USEDBY(payload))
+NEW_FIELD(json, allowed_mentions, USEDBY(payload))
+NEW_FIELD(json, message_reference, USEDBY(payload))
+FORWARD_FIELD(std::string, filename, )
+FORWARD_FIELD(std::string, filetype, )
+FORWARD_FIELD(std::string, file, )
+STATIC_FIELD(std::string, method, "POST")
+AUTO_TARGET("/channels/{}/messages", ARR(channel_id), )
+AUTO_PAYLOAD(PFO(content) PFO(nonce) PFO(tts) PFO(embeds) PFO(allowed_mentions)
+                 PFO(message_reference))
+FORWARD_FIELD(handleWrite, onWrite, )
+FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/channel#crosspost-message
@@ -246,8 +245,7 @@ sptr<const std::string> render_target() override {
     FORWARD_FIELD(handleWrite, onWrite, )                                      \
     FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallOpen.hh>
-protected:
-sptr<const std::string> render_target() override {
+    protected : sptr<const std::string> render_target() override {
     if (!_channel_id)
         throw std::logic_error("Crosspost Message needs a Channel ID");
     if (!_message_id)

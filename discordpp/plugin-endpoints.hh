@@ -44,7 +44,9 @@ template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #include "categories/invite.hh"
 #include "categories/receiving-and-responding.hh"
 #include "categories/stage-instance.hh"
+#include "categories/sticker.hh"
 #include "categories/user.hh"
+#include "categories/voice.hh"
 #include "categories/webhook.hh"
 
 #undef ENDPOINT_BREAKOUTS
