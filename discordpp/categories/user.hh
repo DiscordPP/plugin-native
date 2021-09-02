@@ -38,7 +38,6 @@ FORWARD_FIELD(handleRead, onRead, )
 NEW_FIELD(Snowflake, user_id, USEDBY(target))
 STATIC_FIELD(std::string, method, "GET")
 AUTO_TARGET("/users/{}", ARR(user_id), )
-HIDE_FIELD(target)
 HIDE_FIELD(type)
 HIDE_FIELD(body)
 FORWARD_FIELD(handleWrite, onWrite, )
@@ -56,10 +55,9 @@ NEW_FIELD(std::string, username, USEDBY(payload))
 NEW_FIELD(std::string, avatar, USEDBY(payload))
 STATIC_FIELD(std::string, method, "PATCH")
 STATIC_FIELD(std::string, target, "/users/@me")
-AUTO_PAYLOAD(PFO(username) PFO(avatar))
 HIDE_FIELD(type)
 HIDE_FIELD(body)
-HIDE_FIELD(payload)
+AUTO_PAYLOAD(PFO(username) PFO(avatar))
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
@@ -147,24 +145,9 @@ STATIC_FIELD(std::string, method, "POST")
 STATIC_FIELD(std::string, target, "/users/@me/channels")
 HIDE_FIELD(type)
 HIDE_FIELD(body)
-HIDE_FIELD(payload)
+AUTO_PAYLOAD(PFR(access_tokens) PFO(nicks))
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
-protected:
-sptr<const json> render_payload() override {
-    if (!_access_tokens) {
-        throw std::logic_error("Create Group DM needs Access Tokens");
-    }
-    json out({{"access_tokens", *_access_tokens}});
-
-    if (_nicks) {
-        out["nicks"] = {};
-        for (auto nick : *_nicks) {
-            out["nicks"][std::to_string(nick.first)] = nick.second;
-        }
-    }
-    return std::make_shared<const json>(std::move(out));
-}
 #include <discordpp/macros/defineCallClose.hh>
 
 // https://discord.com/developers/docs/resources/user#get-user-connections
