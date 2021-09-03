@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/sticker#get-sticker
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetStickerCall
 #define function getSticker
@@ -31,7 +30,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListNitroStickerPacksCall
 #define function listNitroStickerPacks, getNitroStickerPacks
@@ -46,7 +44,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/sticker#list-guild-stickers
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListGuildStickerCall
 #define function listGuildStickers, getGuildStickers
@@ -63,7 +60,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/sticker#get-guild-sticker
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildStickerCall
 #define function getGuildSticker
@@ -80,7 +76,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/sticker#create-guild-sticker
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateGuildStickerCall
 #define function createGuildStickers
@@ -101,7 +96,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/sticker#modify-guild-sticker
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildStickerCall
 #define function modifyGuildStickers
@@ -119,7 +113,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/sticker#delete-guild-sticker
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildStickerCall
 #define function deleteGuildSticker

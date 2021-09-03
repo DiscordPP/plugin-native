@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/emoji#list-guild-emojis
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListGuildEmojisCall
 #define function listGuildEmojis
@@ -31,7 +30,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/emoji#get-guild-emoji
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildEmojiCall
 #define function getGuildEmoji
@@ -48,7 +46,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/emoji#create-guild-emoji
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildEmojiCall
 #define function createGuildEmoji
@@ -66,7 +63,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildEmojiCall
 #define function modifyGuildEmoji
@@ -84,7 +80,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/emoji#delete-guild-emoji
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildEmojiCall
 #define function deleteGuildEmoji

@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/guild#create-guild
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildCall
 #define function createGuild
@@ -45,7 +44,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildCall
 #define function getGuild
@@ -62,7 +60,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-guild
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class GetGuildPreviewCall
 #define function getGuildPreview
@@ -106,7 +103,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#delete-guild
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildCall
 #define function deleteGuild
@@ -122,7 +118,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-channels
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildChannelsCall
 #define function getGuildChannels
@@ -138,7 +133,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#create-guild-channels
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildChannelsCall
 #define function createGuildChannels
@@ -190,7 +184,6 @@ sptr<const json> render_payload() override {
 
 // https://discord.com/developers/docs/resources/guild#create-guild-channels
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildChannelPositionsCall
 #define function modifyGuildChannelPositions
@@ -211,7 +204,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#list-active-threads
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListActiveThreadsCall
 #define function listActiveThreads
@@ -227,7 +219,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-member
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildMemberCall
 #define function getGuildMember
@@ -244,7 +235,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#list-guild-members
 // Verified by Westlanderz/SenpaiR6#1717
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListGuildMembersCall
 #define function listGuildMembers
@@ -262,7 +252,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#search-guild-members
 // Verified by Westlanderz/SenpaiR6#1717
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class SearchGuildMembersCall
 #define function searchGuildMembers
@@ -280,7 +269,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#add-guild-member
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class AddGuildMemberCall
 #define function addGuildMember
@@ -301,7 +289,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-guild-member
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildMemberCall
 #define function modifyGuildMember
@@ -322,7 +309,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-current-user-nick
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyCurrentUserNickCall
 #define function modifyCurrentUserNick
@@ -338,7 +324,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#add-guild-member-role
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class AddGuildMemberRoleCall
 #define function addGuildMemberRole
@@ -356,7 +341,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#remove-guild-member-role
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class RemoveGuildMemberRoleCall
 #define function removeGuildMemberRole
@@ -374,7 +358,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#remove-guild-member
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class RemoveGuildMemberCall
 #define function removeGuildMember, kickGuildMember
@@ -391,7 +374,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-bans
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildBansCall
 #define function getGuildBans, listGuildBans
@@ -407,7 +389,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-ban
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildBanCall
 #define function getGuildBan
@@ -424,7 +405,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-ban
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildBanCall
 #define function createGuildBan, banGuildUser
@@ -444,7 +424,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#remove-guild-ban
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class RemoveGuildBanCall
 #define function removeGuildBan, unbanGuildMember
@@ -461,7 +440,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-roles
 // Verified by Westlanderz/SenpaiR6#1717
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildRolesCall
 #define function getGuildRoles
@@ -477,7 +455,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#create-guild-role
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildRoleCall
 #define function createGuildRole
@@ -497,7 +474,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildRolePositionsCall
 #define function modifyGuildRolePositions
@@ -515,7 +491,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-guild-role
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildRoleCall
 #define function modifyGuildRole
@@ -536,7 +511,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#delete-guild-role
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildRoleCall
 #define function deleteGuildRole
@@ -553,7 +527,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-prune-count
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildPruneCountCall
 #define function getGuildPruneCount
@@ -596,7 +569,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#begin-guild-prune
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class BeginGuildPruneCall
 #define function beginGuildPrune
@@ -614,7 +586,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildVoiceRegionsCall
 #define function getGuildVoiceRegions
@@ -630,7 +601,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-invites
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildInvitesCall
 #define function getGuildInvites
@@ -646,7 +616,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-integrations
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildIntegrationsCall
 #define function getGuildIntegrations
@@ -662,7 +631,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#delete-guild-integration
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildIntegrationsCall
 #define function deleteGuildIntegrations
@@ -679,7 +647,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-widget-settings
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildWidgetSettingsCall
 #define function getGuildWidgetSettings
@@ -695,7 +662,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-guild-widget
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildWidgetCall
 #define function modifyGuildWidget
@@ -714,7 +680,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-widget
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildWidgetCall
 #define function getGuildWidget
@@ -730,7 +695,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-vanity-url
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetVanityURLCall
 #define function getVanityURL
@@ -746,7 +710,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-widget-image
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildWidgetImageCall
 #define function getGuildWidgetImage
@@ -768,7 +731,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class GetGuildWelcomeScreenCall
 #define function getGuildWelcomeScreen
@@ -784,7 +746,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildWelcomeScreenCall
 #define function modifyGuildWelcomeScreen
@@ -802,7 +763,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyCurrentUserVoiceStateCall
 #define function modifyCurrentUserVoiceState
@@ -822,7 +782,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild#modify-user-voice-state
 // TODO Unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyUserVoiceStateCall
 #define function modifyUserVoiceState

@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/webhook#create-webhook
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateWebhookCall
 #define function createWebhook
@@ -32,7 +31,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#get-channel-webhooks
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelWebhooksCall
 #define function getChannelWebhooks
@@ -48,7 +46,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#get-guild-webhooks
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildWebhooksCall
 #define function getGuildWebhooks
@@ -64,7 +61,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#get-webhook
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetWebhookCall
 #define function getWebhook
@@ -80,7 +76,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#get-webhook-with-token
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetWebhookWithTokenCall
 #define function getWebhookWithToken
@@ -97,7 +92,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#modify-webhook
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyWebhookCall
 #define function modifyWebhook
@@ -115,7 +109,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyWebhookWithTokenCall
 #define function modifyWebhookWithToken
@@ -133,7 +126,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#delete-webhook
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteWebhookCall
 #define function deleteWebhook
@@ -149,7 +141,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteWebhookWithTokenCall
 #define function deleteWebhookWithToken
@@ -166,7 +157,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#execute-webhook
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class ExecuteWebhookCall
 #define function executeWebhook
@@ -202,7 +192,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#get-webhook-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetWebhookMessageCall
 #define function getWebhookMessage
@@ -221,7 +210,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#edit-webhook-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class editWebhookMessageCall
 #define function editWebhookMessage
@@ -246,7 +234,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/webhook#delete-webhook-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteWebhookMessageCall
 #define function deleteWebhookMessage

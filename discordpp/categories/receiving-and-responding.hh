@@ -18,7 +18,6 @@
 // interaction_type, data
 // Note: interaction_id is the ID of the interaction *event*
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateInteractionResponseCall
 #define function createInteractionResponse, createResponse
@@ -40,7 +39,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetOriginalInteractionResponseCall
 #define function getOriginalInteractionResponse, getOriginalResponse
@@ -61,7 +59,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class deleteOriginalInteractionResponseCall
 #define function deleteOriginalInteractionResponse, deleteOriginalResponse
@@ -79,7 +76,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateFollowupMessageCall
 #define function createFollowupMessage
@@ -107,7 +103,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#get-followup-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetFollowupMessageCall
 #define function getFollowupMessage
@@ -126,7 +121,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class editFollowupMessageCall
 #define function editFollowupMessage
@@ -151,7 +145,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteFollowupMessageCall
 #define function deleteFollowupMessage

@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildAuditLogCall
 #define function getGuildAuditLog

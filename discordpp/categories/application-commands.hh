@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGlobalApplicationCommandsCall
 #define function getGlobalApplicationCommands, getGlobalCommands
@@ -31,7 +30,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#create-global-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGlobalApplicationCommandCall
 #define function createGlobalApplicationCommand, createGlobalCommand
@@ -52,7 +50,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#get-global-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGlobalApplicationCommandCall
 #define function getGlobalApplicationCommand, getGlobalCommand
@@ -69,7 +66,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditGlobalApplicationCommandCall
 #define function editGlobalApplicationCommand, editGlobalCommand
@@ -89,7 +85,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGlobalApplicationCommandCall
 #define function deleteGlobalApplicationCommand, deleteGlobalCommand
@@ -106,7 +101,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class BulkOverwriteGlobalApplicationCommandsCall
 #define function                                                               \
@@ -123,7 +117,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildApplicationCommandsCall
 #define function getGuildApplicationCommands, getGuildCommands
@@ -143,7 +136,6 @@ FORWARD_FIELD(handleRead, onRead, )
 // UndarkAido/Aido#8614 verified application_id, guild_id, name, description,
 // options, command_type
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildApplicationCommandCall
 #define function createGuildApplicationCommand, createGuildCommand
@@ -166,7 +158,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildApplicationCommandCall
 #define function getGuildApplicationCommand, getGuildCommand
@@ -185,7 +176,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditGuildApplicationCommandCall
 #define function editGuildApplicationCommand, editGuildCommand
@@ -207,7 +197,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildApplicationCommandCall
 #define function deleteGuildApplicationCommand, deleteGuildCommand
@@ -226,7 +215,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-guild-application-commands
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class BulkOverwriteGuildApplicationCommandsCall
 #define function                                                               \
@@ -245,7 +233,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildApplicationCommandPermissionsCall
 #define function                                                               \
@@ -265,7 +252,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetApplicationCommandPermissionsCall
 #define function                                                               \
@@ -285,7 +271,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditApplicationCommandPermissionsCall
 #define function                                                               \
@@ -305,7 +290,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/interactions/application-commands#batch-edit-application-command-permissions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class BatchEditApplicationCommandPermissionsCall
 #define function                                                               \

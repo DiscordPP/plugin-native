@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/guild-template#get-guild-template
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildTemplateCall
 #define function getGuildTemplate
@@ -31,7 +30,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild-template#create-guild-from-guild-template
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildFromTemplateCall
 #define function createGuildFromTemplate
@@ -48,7 +46,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild-template#get-guild-templates
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetGuildTemplatesCall
 #define function getGuildTemplates
@@ -64,7 +61,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild-template#create-guild-template
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGuildTemplateCall
 #define function createGuildTemplates
@@ -81,7 +77,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild-template#sync-guild-template
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class SyncGuildTemplateCall
 #define function syncGuildTemplate
@@ -99,7 +94,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild-template#modify-guild-template
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyGuildTemplateCall
 #define function modifyGuildTemplates
@@ -116,7 +110,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/guild-template#delete-guild-template
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteGuildTemplateCall
 #define function deleteGuildTemplate

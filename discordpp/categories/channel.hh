@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/channel#get-channel
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelCall
 #define function getChannel
@@ -31,7 +30,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#modify-channel
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyChannelCall
 #define function modifyChannel
@@ -58,7 +56,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#deleteclose-channel
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteChannelCall
 #define function deleteChannel, closeChannel
@@ -74,7 +71,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#get-channel-messages
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelMessagesCall
 #define function getChannelMessages
@@ -93,7 +89,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#get-channel
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelMessageCall
 #define function getChannelMessage
@@ -112,7 +107,6 @@ FORWARD_FIELD(handleRead, onRead, )
 // UndarkAido/Aido#8614 verified channel_id, content, filename, filetype, file
 // vymishiscool/Vym#2162 verified embeds
 // TODO nonce, tts, allowed_mentions, and message_reference are unverified
-#define Bot PluginEndpoints
 #define Parent FileCall
 #define Class CreateMessageCall
 #define function createMessage
@@ -137,7 +131,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#crosspost-message
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class CrosspostMessageCall
 #define function crosspostMessage
@@ -154,7 +147,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#create-reaction
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class CreateReactionCall
 #define function createReaction
@@ -173,7 +165,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-own-reaction
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteOwnReactionCall
 #define function deleteOwnReaction
@@ -203,7 +194,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-user-reaction
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteUserReactionCall
 #define function deleteUserReaction
@@ -233,7 +223,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#get-reactions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetReactionsCall
 #define function getReactions
@@ -267,7 +256,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-all-reactions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteAllReactionsCall
 #define function deleteAllReactions
@@ -284,7 +272,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteAllReactionsForEmojiCall
 #define function deleteAllReactionsForEmoji
@@ -313,7 +300,6 @@ FORWARD_FIELD(handleRead, onRead, )
 // Westlanderz/SenpaiR6#1717 verified channel_id, message_id, content, embed and
 // flags
 // TODO allowed_mentions is unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditMessageCall
 #define function editMessage
@@ -335,7 +321,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-message
 // Verified by Westlanderz/SenpaiR6#1717
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteMessageCall
 #define function deleteMessage
@@ -352,7 +337,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#bulk-delete-messages
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class BulkDeleteMessagesCall
 #define function bulkDeleteMessages
@@ -370,7 +354,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#edit-channel-permissions
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class EditChannelPermissionsCall
 #define function editChannelPermissions
@@ -391,7 +374,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#get-channel-invites
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetChannelInvitesCall
 #define function getChannelInvites
@@ -407,7 +389,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#create-channel-invite
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateChannelInviteCall
 #define function createChannelInvite
@@ -431,7 +412,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-channel-permission
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteChannelPermissionCall
 #define function deleteChannelPermissions
@@ -448,7 +428,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#follow-news-channel
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class FollowNewsChannelCall
 #define function followNewsChannel
@@ -466,7 +445,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class TriggerTypingIndicatorCall
 #define function triggerTypingIndicator
@@ -482,7 +460,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#get-pinned-messages
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetPinnedMessagesCall
 #define function getPinnedMessages
@@ -498,7 +475,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#add-pinned-channel-message
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class AddPinnedChannelMessageCall
 #define function addPinnedChannelMessage
@@ -515,7 +491,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeletePinnedChannelMessageCall
 #define function deletePinnedChannelMessage
@@ -532,7 +507,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class AddGroupDMRecipientCall
 #define function addGroupDMRecipient
@@ -552,7 +526,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class RemoveGroupDMRecipientCall
 #define function removeGroupDMRecipient
@@ -569,7 +542,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#start-thread-with-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class StartThreadWithMessageCall
 #define function startThreadWithMessage
@@ -587,7 +559,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#start-thread-without-message
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class StartThreadWithoutMessageCall
 #define function startThreadWithoutMessage, startThreadWoutMessage
@@ -606,7 +577,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#join-thread
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class JoinThreadCall
 #define function joinThread
@@ -622,7 +592,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#add-thread-member
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class AddThreadMemberCall
 #define function addThreadMember
@@ -639,7 +608,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#leave-thread
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class LeaveThreadCall
 #define function leaveThread
@@ -655,7 +623,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#remove-thread-member
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class RemoveThreadMemberCall
 #define function removeThreadMember
@@ -672,7 +639,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#list-thread-members
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListThreadMembersCall
 #define function listThreadMembers
@@ -688,7 +654,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#list-public-archived-threads
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListPublicArchivedThreadsCall
 #define function listPublicArchivedThreads
@@ -707,7 +672,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#list-private-archived-threads
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListPrivateArchivedThreadsCall
 #define function listPrivateArchivedThreads
@@ -726,7 +690,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class ListJoinedPrivateArchivedThreadsCall
 #define function listJoinedPrivateArchivedThreads

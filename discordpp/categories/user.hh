@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/user#get-current-user
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetCurrentUserCall
 #define function getCurrentUser, getSelf
@@ -30,7 +29,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/user#get-user
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetUserCall
 #define function getUser
@@ -46,7 +44,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/user#modify-current-user
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyCurrentUserCall
 #define function modifyCurrentUser, modifySelf
@@ -64,7 +61,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/user#get-current-user-guilds
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetCurrentUserGuildsCall
 #define function getCurrentUserGuilds, getOwnGuilds
@@ -100,7 +96,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/user#leave-guild
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class LeaveGuildCall
 #define function leaveGuild
@@ -116,7 +111,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/user#create-dm
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateDMCall
 #define function createDM
@@ -132,7 +126,6 @@ FORWARD_FIELD(handleRead, onRead, )
 // https://discord.com/developers/docs/resources/user#create-group-dm
 // Broken payload identified by Westlanderz/SenpaiR6#1717
 // Verified by UndarkAido/Aido#8614
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateGroupDMCall
 #define function createGroupDM
@@ -152,7 +145,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/user#get-user-connections
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetUserConnectionsCall
 #define function                                                               \

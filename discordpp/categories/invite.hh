@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/invite#get-invite
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetInviteCall
 #define function getInvite
@@ -34,7 +33,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/invite#delete-invite
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteInviteCall
 #define function deleteInvite

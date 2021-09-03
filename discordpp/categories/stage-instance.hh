@@ -15,7 +15,6 @@
 
 // https://discord.com/developers/docs/resources/stage-instance#create-stage-instance
 // TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class CreateStageInstanceLogCall
 #define function createStageInstance
@@ -32,7 +31,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/stage-instance#get-stage-instance
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class GetStageInstanceLogCall
 #define function getStageInstance
@@ -48,7 +46,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent JsonCall
 #define Class ModifyStageInstanceLogCall
 #define function modifyStageInstance
@@ -65,7 +62,6 @@ FORWARD_FIELD(handleRead, onRead, )
 
 // https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance
 //  TODO unverified
-#define Bot PluginEndpoints
 #define Parent Call
 #define Class DeleteStageInstanceLogCall
 #define function deleteStageInstance
