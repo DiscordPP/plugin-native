@@ -533,32 +533,7 @@ FORWARD_FIELD(handleRead, onRead, )
 NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(int, days, USEDBY(target))
 NEW_FIELD(std::vector<Snowflake>, include_roles, USEDBY(target))
-HIDE_FIELD(target)
-protected:
-sptr<const std::string> render_target() override {
-    REQUIRE_VAR(guild_id)
-    std::string out = fmt::format("/guilds/{}/roles", to_string(*_guild_id));
-    bool first = true;
-    if (_days) {
-        out += fmt::format("{}days={}", first ? "?" : "&", *_days);
-        first = false;
-    }
-    if (_include_roles) {
-        out += fmt::format("{}include_roles={}", first ? "?" : "&", [this]() {
-            std::string out;
-            bool first = true;
-            std::for_each(_include_roles->begin(), _include_roles->end(),
-                          [&first, &out](Snowflake &sf) {
-                              out += fmt::format("{}{}", first ? "" : ",",
-                                                 to_string(sf));
-                              first = false;
-                          });
-            return std::move(out);
-        });
-        first = false;
-    };
-    return std::make_shared<const std::string>(out);
-}
+AUTO_TARGET("/guilds/{}/roles", ARR(guild_id), QSO(days) QSO(include_roles))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(type)
 HIDE_FIELD(body)
