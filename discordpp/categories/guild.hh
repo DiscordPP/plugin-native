@@ -689,12 +689,7 @@ FORWARD_FIELD(handleRead, onRead, )
 #define function getGuildWidgetImage
 #include <discordpp/macros/defineCallOpen.hh>
 NEW_FIELD(Snowflake, guild_id, USEDBY(target))
-NEW_FIELD(std::string, style, USEDBY(target))
-auto style(const WidgetStyleOptions &styleIn) {
-    static const char *strs[] = {"shield", "banner1", "banner2", "banner3",
-                                 "banner4"};
-    return style(std::make_shared<std::string>(strs[styleIn]));
-}
+NEW_FIELD(WidgetStyleOptions, style, USEDBY(target))
 AUTO_TARGET("/guilds/{}/widget.png", ARR(guild_id), QSO(style))
 STATIC_FIELD(std::string, method, "GET")
 HIDE_FIELD(type)
