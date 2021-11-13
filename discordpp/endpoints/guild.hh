@@ -524,6 +524,7 @@ FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
+/*/ TODO temporarily disabled as std::vector<Snowflake> doesn't agree with {fmt}
 // https://discord.com/developers/docs/resources/guild#get-guild-prune-count
 // TODO Unverified
 #define Parent Call
@@ -540,6 +541,7 @@ HIDE_FIELD(body)
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
+/*/
 
 // https://discord.com/developers/docs/resources/guild#begin-guild-prune
 // TODO Unverified
@@ -758,7 +760,7 @@ NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(Snowflake, user_id, USEDBY(target))
 NEW_FIELD(Snowflake, channel_id, USEDBY(payload))
 NEW_FIELD(bool, suppress, USEDBY(payload))
-AUTO_TARGET("/guilds/{}/voice-states/{}}", ARR(guild_id, user_id), )
+AUTO_TARGET("/guilds/{}/voice-states/{}", ARR(guild_id, user_id), )
 STATIC_FIELD(std::string, method, "PATCH")
 AUTO_PAYLOAD(PFO(channel_id) PFO(suppress))
 FORWARD_FIELD(handleWrite, onWrite, )
