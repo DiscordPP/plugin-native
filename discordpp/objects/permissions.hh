@@ -24,7 +24,7 @@
 #define Fields                                                                 \
     omittable_field(Snowflake, bot_id),                                        \
         omittable_field(Snowflake, integration_id),                            \
-        omittable_field(nullptr_t, premium_subscriber)
+        omittable_field(std::nullptr_t, premium_subscriber)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"

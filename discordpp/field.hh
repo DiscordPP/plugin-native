@@ -35,6 +35,12 @@ template <typename T> class field {
     field(const F &f) requires std::convertible_to<F, T>
         : t_(std::make_unique<T>(f)) {}
 
+#else
+
+    template<size_t N, typename = std::enable_if<std::is_same_v<T, std::string>>>
+    field(char const (&t)[N])
+        : t_(std::make_unique<T>(t)) {}
+
 #endif
 
     operator bool() const { return s_ == present_e; }
