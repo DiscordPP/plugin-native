@@ -10,7 +10,7 @@
 // channel with proof of credit for the @Endpoint Verifier role!
 
 #ifndef ENDPOINT_BREAKOUTS
-#error This header should only be included in plugin-endpoints.hh
+#error This header should only be included in plugin-native.hh
 #endif
 
 // https://discord.com/developers/docs/resources/guild#create-guild
@@ -524,7 +524,6 @@ FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
 
-/*/ TODO temporarily disabled as std::vector<Snowflake> doesn't agree with {fmt}
 // https://discord.com/developers/docs/resources/guild#get-guild-prune-count
 // TODO Unverified
 #define Parent Call
@@ -541,7 +540,6 @@ HIDE_FIELD(body)
 FORWARD_FIELD(handleWrite, onWrite, )
 FORWARD_FIELD(handleRead, onRead, )
 #include <discordpp/macros/defineCallClose.hh>
-/*/
 
 // https://discord.com/developers/docs/resources/guild#begin-guild-prune
 // TODO Unverified

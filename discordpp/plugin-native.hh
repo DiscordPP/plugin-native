@@ -1,7 +1,13 @@
 #pragma once
 
 #include <fmt/format.h>
+#include <fmt/ranges.h>
 #include <iomanip>
+#include <metalang99.h>
+
+#if !ML99_VERSION_COMPATIBLE(1, 12, 0)
+#error Please, update your Metalang99 to v1.12.0 or higher!
+#endif
 
 namespace discordpp {
 
@@ -34,8 +40,6 @@ inline std::string url_encode(const std::string &value) {
 
 #define OBJECT_BREAKOUTS
 //#define Bot PluginObjects
-#include "macros/define-objects.hh"
-/* This space intentionally left blank */
 using Timestamp = std::string;
 /* This space intentionally left blank */
 #include "discordpp/objects_fwd/application-commands_fwd.hh"
@@ -81,14 +85,12 @@ using Timestamp = std::string;
 #include "objects/webhook.hh"
 /* This space intentionally left blank */
 #include "objects/receiving-and-responding.hh"
-/* This space intentionally left blank */
-#include "macros/undefine-objects.hh"
 //#undef Bot
 #undef OBJECT_BREAKOUTS
 
-template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
+template <class BASE> class PluginNative : public BASE, virtual BotStruct {
 #define ENDPOINT_BREAKOUTS
-#define Bot PluginEndpoints
+#define Bot PluginNative
 
 #include "endpoints/application-commands.hh"
 #include "endpoints/audit-log.hh"
@@ -100,8 +102,6 @@ template <class BASE> class PluginEndpoints : public BASE, virtual BotStruct {
 #include "endpoints/receiving-and-responding.hh"
 #include "endpoints/stage-instance.hh"
 #include "endpoints/sticker.hh"
-#include "endpoints/user.hh"
-#include "endpoints/voice.hh"
 #include "endpoints/webhook.hh"
 
 #undef Bot
