@@ -2,49 +2,32 @@
 // Created by Aidan on 8/27/2021.
 //
 
-
 #ifndef OBJECT_BREAKOUTS
 #error This header should only be included in plugin-objects.hh
 #endif
 
 #include "../field.hh"
 
-class Device {
-  public:
-    AUTO_CONSTRUCTORS(Device)
+#define Name Device
+#define Fields                                                                 \
+    field(DeviceType, type), field(std::string, id), field(Vendor, vendor),    \
+        field(Model, model), field(std::vector<std::string>, related),         \
+        omittable_field(bool, echo_cancellation),                              \
+        omittable_field(bool, noise_suppression),                              \
+        omittable_field(bool, automatic_gain_control),                         \
+        omittable_field(bool, hardware_mute)
+#include "../util/defineObjectOpen.hh"
+// This space intentionally left blank
+#include "../util/defineObjectClose.hh"
 
-    field<DeviceType> type;
-    field<std::string> id;
-    field<Vendor> vendor;
-    field<Model> model;
-    field<std::vector<std::string>> related;
-    omittable_field<bool> echo_cancellation;
-    omittable_field<bool> noise_suppression;
-    omittable_field<bool> automatic_gain_control;
-    omittable_field<bool> hardware_mute;
+#define Name Vendor
+#define Fields field(std::string, name), field(std::string, url)
+#include "../util/defineObjectOpen.hh"
+// This space intentionally left blank
+#include "../util/defineObjectClose.hh"
 
-    NLOHMANN_DEFINE_FIELD_TYPE_INTRUSIVE(Device, {}, {}, type, id, vendor,
-                                         model, related, echo_cancellation,
-                                         noise_suppression,
-                                         automatic_gain_control, hardware_mute)
-};
-
-class Vendor {
-  public:
-    AUTO_CONSTRUCTORS(Vendor)
-
-    field<std::string> name;
-    field<std::string> url;
-
-    NLOHMANN_DEFINE_FIELD_TYPE_INTRUSIVE(Vendor, {}, {}, name, url)
-};
-
-class Model {
-  public:
-    AUTO_CONSTRUCTORS(Model)
-
-    field<std::string> name;
-    field<std::string> url;
-
-    NLOHMANN_DEFINE_FIELD_TYPE_INTRUSIVE(Model, {}, {}, name, url)
-};
+#define Name Model
+#define Fields field(std::string, name), field(std::string, url)
+#include "../util/defineObjectOpen.hh"
+// This space intentionally left blank
+#include "../util/defineObjectClose.hh"

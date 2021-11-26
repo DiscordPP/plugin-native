@@ -7,5 +7,5 @@
 #error This header should only be included in plugin-objects.hh
 #endif
 
-using Role = json;
-using RoleTags = json;
+class Role;
+class RoleTags;

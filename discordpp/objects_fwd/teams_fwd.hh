@@ -7,5 +7,5 @@
 #error This header should only be included in plugin-objects.hh
 #endif
 
-using Team = json;
-using TeamMember = json;
+class Team;
+class TeamMember;

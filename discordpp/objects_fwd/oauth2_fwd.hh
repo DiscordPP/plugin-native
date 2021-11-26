@@ -7,4 +7,4 @@
 #error This header should only be included in plugin-objects.hh
 #endif
 
-using CurrentAuthorizationInformation = json;
+class CurrentAuthorizationInformation;
