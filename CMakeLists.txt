@@ -15,8 +15,8 @@ set(ALL_DISCORDPP_PLUGINS ${ALL_DISCORDPP_PLUGINS} PARENT_SCOPE)
 include(FetchContent)
 FetchContent_Declare(
         metalang99
-        GIT_REPOSITORY https://github.com/UndarkAido/metalang99.git
-        GIT_TAG patch-1
+        GIT_REPOSITORY https://github.com/Hirrolot/metalang99.git
+        GIT_TAG v1.13.1
 )
 FetchContent_MakeAvailable(metalang99)
 
