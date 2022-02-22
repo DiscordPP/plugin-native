@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name AuditLog
 #define Fields                                                                 \
     field(std::vector<AuditLogEntry>, audit_log_entries),                      \
@@ -18,6 +19,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name AuditLogEntry
 #define Fields                                                                 \
     nullable_field(Snowflake, target_id),                                      \
@@ -30,6 +32,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name OptionalAuditEntryInfo
 #define Fields                                                                 \
     omittable_field(Snowflake, channel_id),                                    \
@@ -43,6 +46,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name AuditLogChange
 #define Fields                                                                 \
     omittable_field(json, new_value), omittable_field(json, old_value),        \

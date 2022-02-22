@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified Channel
 #define Name Channel
 #define Fields                                                                 \
     field(Snowflake, id), field(int, type),                                    \
@@ -37,6 +38,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Message
 #define Fields                                                                 \
     field(Snowflake, id), field(Snowflake, channel_id),                        \
@@ -66,6 +68,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name MessageActivity
 #define Fields                                                                 \
     field(MessageActivityType, type), omittable_field(std::string, party_id)
@@ -73,6 +76,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name MessageReference
 #define Fields                                                                 \
     omittable_field(Snowflake, message_id),                                    \
@@ -83,18 +87,21 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name FollowedChannel
 #define Fields field(Snowflake, channel_id), field(Snowflake, webhook_id)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Reaction
 #define Fields field(int, count), field(bool, me), field(Emoji, emoji)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Overwrite
 #define Fields                                                                 \
     field(Snowflake, id), field(int, type), field(std::string, allow),         \
@@ -103,6 +110,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ThreadMetadata
 #define Fields                                                                 \
     field(bool, archived), field(int, auto_archive_duration),                  \
@@ -112,6 +120,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ThreadMember
 #define Fields                                                                 \
     omittable_field(Snowflake, id), omittable_field(Snowflake, user_id),       \
@@ -120,6 +129,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Embed
 #define Fields                                                                 \
     omittable_field(std::string, title), omittable_field(EmbedType, type),     \
@@ -137,6 +147,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedThumbnail
 #define Fields                                                                 \
     field(std::string, url), omittable_field(std::string, proxy_url),          \
@@ -145,6 +156,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedVideo
 #define Fields                                                                 \
     omittable_field(std::string, url),                                         \
@@ -154,6 +166,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedImage
 #define Fields                                                                 \
     field(std::string, url), omittable_field(std::string, proxy_url),          \
@@ -162,6 +175,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedProvider
 #define Fields                                                                 \
     omittable_field(std::string, name), omittable_field(std::string, url)
@@ -169,6 +183,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedAuthor
 #define Fields                                                                 \
     field(std::string, name), omittable_field(std::string, url),               \
@@ -178,6 +193,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedFooter
 #define Fields                                                                 \
     field(std::string, text), omittable_field(std::string, icon_url),          \
@@ -186,6 +202,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name EmbedField
 #define Fields                                                                 \
     field(std::string, name), field(std::string, value),                       \
@@ -194,6 +211,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Attachment
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, filename),                        \
@@ -205,6 +223,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ChannelMention
 #define Fields                                                                 \
     field(Snowflake, id), field(Snowflake, guild_id),                          \
@@ -213,6 +232,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name AllowedMentions
 #define Fields                                                                 \
     field(std::vector<AllowedMentionType>, parse),                             \

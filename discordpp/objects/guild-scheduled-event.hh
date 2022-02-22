@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name GuildScheduledEvent
 #define Fields \
     field(Snowflake, id),\
@@ -30,12 +31,13 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
-#define Name GuildScheduledEventMetadata
+// TODO unverified
 #define Fields omittable_field(std::string, location)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name GuildScheduledEventUser
 #define Fields \
     field(Snowflake, guild_scheduled_event_id),\

@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Component
 #define Fields                                                                 \
     field(ComponentType, type), omittable_field(std::string, custom_id),       \
@@ -22,6 +23,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Button
 #define Parent Component
 #define Fields                                                                 \
@@ -38,6 +40,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name SelectMenu
 #define Parent Component
 #define Fields                                                                 \
@@ -53,6 +56,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ActionRow
 #define Parent Component
 #define Fields                                                                 \
@@ -67,6 +71,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name SelectOption
 #define Fields                                                                 \
     field(std::string, label), field(std::string, value),                      \

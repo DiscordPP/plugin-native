@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Interaction
 #define Fields                                                                 \
     field(Snowflake, id), field(Snowflake, application_id),                    \
@@ -21,6 +22,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name InteractionData
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name), field(int, type),          \
@@ -40,6 +42,7 @@ using ResolvedDataMembers = std::map<Snowflake, User>;
 using ResolvedDataRoles = std::map<Snowflake, User>;
 using ResolvedDataChannels = std::map<Snowflake, User>;
 using ResolvedDataMessages = std::map<Snowflake, User>;
+// TODO unverified
 #define Name ResolvedData
 #define Fields                                                                 \
     omittable_field(ResolvedDataUsers, users),                                 \
@@ -51,6 +54,7 @@ using ResolvedDataMessages = std::map<Snowflake, User>;
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name MessageInteraction
 #define Fields                                                                 \
     field(Snowflake, id), field(InteractionType, type),                        \
@@ -59,6 +63,7 @@ using ResolvedDataMessages = std::map<Snowflake, User>;
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name InteractionResponse
 #define Fields                                                                 \
     field(InteractionType, type), omittable_field(InteractionCallbackData, data)
@@ -66,6 +71,7 @@ using ResolvedDataMessages = std::map<Snowflake, User>;
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name InteractionCallbackData
 #define Fields                                                                 \
     omittable_field(bool, tts), omittable_field(std::string, content),         \

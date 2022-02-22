@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name StageInstance
 #define Fields                                                                 \
     field(Snowflake, id), field(Snowflake, guild_id),                          \

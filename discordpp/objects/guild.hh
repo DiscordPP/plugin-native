@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Guild
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name),                            \
@@ -56,12 +57,14 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name UnavailableGuild
 #define Fields field(Snowflake, id), omittable_field(bool, unavailable)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name GuildPreview
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name),                            \
@@ -77,12 +80,14 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name GuildWidget
 #define Fields field(bool, enabled), nullable_field(Snowflake, channel_id)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name GuildMember
 #define Fields                                                                 \
     omittable_field(User, user), nullable_omittable_field(std::string, nick),  \
@@ -95,6 +100,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Integration
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name), field(std::string, type),  \
@@ -112,12 +118,14 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name IntegrationAccount
 #define Fields field(std::string, id), field(std::string, name)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name IntegrationApplication
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name),                            \
@@ -127,12 +135,14 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Ban
 #define Fields nullable_field(std::string, reason), field(User, user)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name WelcomeScreen
 #define Fields                                                                 \
     nullable_field(std::string, description),                                  \
@@ -141,6 +151,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name WelcomeScreenChannel
 #define Fields                                                                 \
     field(Snowflake, channel_id), field(std::string, description),             \

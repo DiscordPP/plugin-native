@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name ApplicationCommand
 #define Fields                                                                 \
     field(Snowflake, id), omittable_field(ApplicationCommandType, type),       \
@@ -20,6 +21,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ApplicationCommandOption
 #define Fields                                                                 \
     field(ApplicationCommandOptionType, type), field(std::string, name),       \
@@ -33,6 +35,7 @@
 
 using ApplicationCommandOptionChoiceValue =
     std::variant<int, double, std::string>;
+// TODO unverified
 #define Name ApplicationCommandOptionChoice
 #define Fields                                                                 \
     field(std::string, name), field(ApplicationCommandOptionChoiceValue, value)
@@ -40,6 +43,7 @@ using ApplicationCommandOptionChoiceValue =
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ApplicationCommandInteractionDataOption
 #define Fields                                                                 \
     field(std::string, name), field(ApplicationCommandOptionType, type),       \
@@ -50,6 +54,7 @@ using ApplicationCommandOptionChoiceValue =
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name GuildApplicationCommandPermissions
 #define Fields                                                                 \
     field(Snowflake, id), field(Snowflake, application_id),                    \
@@ -59,6 +64,7 @@ using ApplicationCommandOptionChoiceValue =
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name ApplicationCommandPermission
 #define Fields                                                                 \
     field(Snowflake, id), field(ApplicationCommandPermissionType, type),       \

@@ -9,6 +9,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Sticker
 #define Fields                                                                 \
 field(Snowflake, id),\
@@ -26,6 +27,7 @@ omittable_field(int, sort_value)
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name StickerItem
 #define Fields                                                                 \
 field(Snowflake, id),\
@@ -35,6 +37,7 @@ field(int, format_type)
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name StickerPack
 #define Fields                                                                 \
 field(Snowflake, id),\

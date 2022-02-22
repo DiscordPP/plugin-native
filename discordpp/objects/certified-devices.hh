@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Device
 #define Fields                                                                 \
     field(DeviceType, type), field(std::string, id), field(Vendor, vendor),    \
@@ -20,12 +21,14 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Vendor
 #define Fields field(std::string, name), field(std::string, url)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Model
 #define Fields field(std::string, name), field(std::string, url)
 #include "../util/defineObjectOpen.hh"

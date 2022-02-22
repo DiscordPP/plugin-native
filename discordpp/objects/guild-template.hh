@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name GuildTemplate
 #define Fields                                                                 \
     field(std::string, code), field(std::string, name),                        \

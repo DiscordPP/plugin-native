@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name User
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, username),                        \
@@ -24,6 +25,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name Connection
 #define Fields                                                                 \
     field(std::string, id), field(std::string, name),                          \

@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Invite
 #define Fields                                                                 \
     field(std::string, code), omittable_field(Guild, guild),                   \
@@ -23,6 +24,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name InviteMetadata
 #define Fields                                                                 \
     field(int, uses), field(int, max_uses), field(int, max_age),               \
@@ -31,6 +33,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name InviteStageInstance
 #define Fields                                                                 \
     field(std::vector<GuildMember>, members), field(int, participant_count),   \

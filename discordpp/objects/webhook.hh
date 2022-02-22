@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Webhook
 #define Fields                                                                 \
     field(Snowflake, id), field(int, type),                                    \

@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Application
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name),                            \

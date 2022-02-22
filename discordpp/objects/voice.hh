@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name VoiceState
 #define Fields                                                                 \
     omittable_field(Snowflake, guild_id),                                      \
@@ -21,6 +22,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name VoiceRegion
 #define Fields                                                                 \
     field(std::string, id), field(std::string, name), field(bool, optimal),    \

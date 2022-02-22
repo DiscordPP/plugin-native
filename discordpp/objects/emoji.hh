@@ -10,6 +10,7 @@
 
 class User;
 
+// TODO unverified
 #define Name Emoji
 #define Fields                                                                 \
     nullable_field(Snowflake, id), nullable_field(std::string, name),          \

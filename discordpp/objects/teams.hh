@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Team
 #define Fields                                                                 \
     nullable_field(std::string, icon), field(Snowflake, id),                   \
@@ -17,6 +18,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name TeamMember
 #define Fields                                                                 \
     field(int, membership_state),                                              \

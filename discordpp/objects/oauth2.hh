@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name CurrentAuthorizationInformation
 #define Fields                                                                 \
     field(Application, application), field(std::vector<std::string>, scopes),  \

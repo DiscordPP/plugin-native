@@ -9,6 +9,7 @@
 #include "../field.hh"
 
 using ReadyShard = std::array<int, 2>;
+// TODO unverified
 #define Name Ready
 #define Fields                                                                 \
     field(int, "v", version), field(User, user),                               \

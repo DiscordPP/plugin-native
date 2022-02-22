@@ -8,6 +8,7 @@
 
 #include "../field.hh"
 
+// TODO unverified
 #define Name Role
 #define Fields                                                                 \
     field(Snowflake, id), field(std::string, name), field(int, color),         \
@@ -20,6 +21,7 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+// TODO unverified
 #define Name RoleTags
 #define Fields                                                                 \
     omittable_field(Snowflake, bot_id),                                        \
