@@ -8,5 +8,5 @@
 #endif
 
 class GuildScheduledEvent;
-class GuildScheduledEventMetadata;
+class GuildScheduledEventEntityMetadata;
 class GuildScheduledEventUser;

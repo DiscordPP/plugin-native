@@ -23,7 +23,7 @@
     field(GuildScheduledEventStatus, status),\
     field(GuildScheduledEventEntityType, entity_type),\
     nullable_field(Snowflake, entity_id),\
-    nullable_field(GuildScheduledEventMetadata, entity_metadata),\
+    nullable_field(GuildScheduledEventEntityMetadata, entity_metadata),\
     omittable_field(User, creator),\
     omittable_field(int, user_count),\
     nullable_field(std::string, image)
@@ -32,6 +32,7 @@
 #include "../util/defineObjectClose.hh"
 
 // TODO unverified
+#define Name GuildScheduledEventEntityMetadata
 #define Fields omittable_field(std::string, location)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank

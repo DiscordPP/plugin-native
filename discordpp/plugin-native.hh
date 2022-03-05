@@ -41,6 +41,7 @@ inline std::string url_encode(const std::string &value) {
 #define OBJECT_BREAKOUTS
 //#define Bot PluginObjects
 using Timestamp = std::string;
+using ImageData = std::string;
 /* This space intentionally left blank */
 #include "discordpp/objects_fwd/application-commands_fwd.hh"
 #include "discordpp/objects_fwd/application_fwd.hh"
@@ -99,6 +100,7 @@ template <class BASE> class PluginNative : public BASE, virtual BotStruct {
 #include "endpoints/channel.hh"
 #include "endpoints/emoji.hh"
 #include "endpoints/guild-template.hh"
+#include "endpoints/guild-scheduled-event.hh"
 #include "endpoints/guild.hh"
 #include "endpoints/invite.hh"
 #include "endpoints/receiving-and-responding.hh"
