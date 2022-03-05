@@ -21,6 +21,8 @@
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
 
+using ApplicationCommandOptionMinMaxValue =
+    std::variant<int, double, std::string>;
 // TODO unverified
 #define Name ApplicationCommandOption
 #define Fields                                                                 \
@@ -28,7 +30,10 @@
         field(std::string, description), omittable_field(bool, required),      \
         omittable_field(std::vector<ApplicationCommandOptionChoice>, choices), \
         omittable_field(std::vector<ApplicationCommandOption>, options),       \
-        omittable_field(MessageType, channel_types)
+        omittable_field(MessageType, channel_types),                           \
+        omittable_field(ApplicationCommandOptionMinMaxValue, min_value),       \
+        omittable_field(ApplicationCommandOptionMinMaxValue, max_value),       \
+        omittable_field(bool, autocomplete)
 #include "../util/defineObjectOpen.hh"
 // This space intentionally left blank
 #include "../util/defineObjectClose.hh"
