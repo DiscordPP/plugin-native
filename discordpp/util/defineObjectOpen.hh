@@ -59,7 +59,7 @@ class Name
 #define exclude_field(...) ML99_OVERLOAD(NAME_, __VA_ARGS__)
 #define exclude_field_1(NAME) ML99_NOTHING()
 #define exclude_field_2(KEY, NAME) ML99_NOTHING()
-    Name(ML99_LIST_EVAL_COMMA_SEP(ML99_listMap(v(ML99_maybeUnwrap), ML99_listFilter(v(ML99_isJust), ML99_list(v(Fields))))))
+    Name(ML99_LIST_EVAL_COMMA_SEP(ML99_listFilterMap(v(ML99_id), ML99_list(v(Fields)))))
 #undef exclude_field_2
 #undef exclude_field_1
 #undef exclude_field
@@ -112,7 +112,7 @@ class Name
 #define nullable_omittable_field(...) ML99_OVERLOAD(nullable_omittable_field_, __VA_ARGS__)
 #define nullable_omittable_field_2(TYPE, NAME) ML99_JUST(NAME(NAME))
 #define nullable_omittable_field_3(TYPE, KEY, NAME) ML99_JUST(NAME(NAME))
-        : ML99_LIST_EVAL_COMMA_SEP(ML99_listMap(v(ML99_maybeUnwrap), ML99_listFilter(v(ML99_isJust), ML99_list(v(Fields)))))
+        : ML99_LIST_EVAL_COMMA_SEP(ML99_listFilterMap(v(ML99_id), ML99_list(v(Fields))))
 #undef nullable_omittable_field_3
 #undef nullable_omittable_field_2
 #undef nullable_omittable_field
@@ -153,7 +153,7 @@ class Name
 #define exclude_field(...) ML99_OVERLOAD(exclude_field_, __VA_ARGS__)
 #define exclude_field_1(NAME) ML99_JUST(omitted)
 #define exclude_field_2(KEY, NAME) ML99_JUST(omitted)
-        : Parent(ML99_LIST_EVAL_COMMA_SEP(ML99_listMap(v(ML99_maybeUnwrap), ML99_listFilter(v(ML99_isJust), ML99_list(v(Fields))))))
+        : Parent(ML99_LIST_EVAL_COMMA_SEP(ML99_listFilterMap(v(ML99_id), ML99_list(v(Fields)))))
 #undef exclude_field_2
 #undef exclude_field_1
 #undef exclude_field
@@ -225,7 +225,7 @@ class Name
 #define exclude_field(...) ML99_OVERLOAD(NAME_, __VA_ARGS__)
 #define exclude_field_1(NAME) ML99_JUST(private: using Parent::NAME; public:)
 #define exclude_field_2(KEY, NAME) ML99_JUST(private: using Parent::NAME; public:)
-    ML99_LIST_EVAL(ML99_listMap(v(ML99_maybeUnwrap), ML99_listFilter(v(ML99_isJust), ML99_list(v(Fields)))))
+    ML99_LIST_EVAL(ML99_listFilterMap(v(ML99_id), ML99_list(v(Fields))))
 #undef exclude_field_2
 #undef exclude_field_1
 #undef exclude_field
@@ -288,7 +288,7 @@ class Name
 #ifdef ToJsonExtra
         ToJsonExtra;
 #endif
-        ML99_LIST_EVAL(ML99_listMap(v(ML99_maybeUnwrap), ML99_listFilter(v(ML99_isJust), ML99_list(v(Fields)))))
+        ML99_LIST_EVAL(ML99_listFilterMap(v(ML99_id), ML99_list(v(Fields))))
     }
 #undef nullable_omittable_field_3
 #undef nullable_omittable_field_2
@@ -325,7 +325,7 @@ class Name
 #ifdef FromJsonExtra
         FromJsonExtra;
 #endif
-        ML99_LIST_EVAL(ML99_listMap(v(ML99_maybeUnwrap), ML99_listFilter(v(ML99_isJust), ML99_list(v(Fields)))))
+        ML99_LIST_EVAL(ML99_listFilterMap(v(ML99_id), ML99_list(v(Fields))))
     }
 #undef nullable_omittable_field_3
 #undef nullable_omittable_field_2
