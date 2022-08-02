@@ -10,7 +10,7 @@
 // channel with proof of credit for the @Endpoint Verifier role!
 
 #ifndef ENDPOINT_BREAKOUTS
-#error This header should only be included in plugin-endpoints.hh
+#error This header should only be included in plugin-native.hh
 #endif
 
 // https://discord.com/developers/docs/resources/guild#create-guild
@@ -758,7 +758,7 @@ NEW_FIELD(Snowflake, guild_id, USEDBY(target))
 NEW_FIELD(Snowflake, user_id, USEDBY(target))
 NEW_FIELD(Snowflake, channel_id, USEDBY(payload))
 NEW_FIELD(bool, suppress, USEDBY(payload))
-AUTO_TARGET("/guilds/{}/voice-states/{}}", ARR(guild_id, user_id), )
+AUTO_TARGET("/guilds/{}/voice-states/{}", ARR(guild_id, user_id), )
 STATIC_FIELD(std::string, method, "PATCH")
 AUTO_PAYLOAD(PFO(channel_id) PFO(suppress))
 FORWARD_FIELD(handleWrite, onWrite, )

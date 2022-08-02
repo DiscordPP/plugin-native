@@ -10,7 +10,7 @@
 // channel with proof of credit for the @Endpoint Verifier role!
 
 #ifndef ENDPOINT_BREAKOUTS
-#error This header should only be included in plugin-endpoints.hh
+#error This header should only be included in plugin-native.hh
 #endif
 
 // https://discord.com/developers/docs/resources/invite#get-invite

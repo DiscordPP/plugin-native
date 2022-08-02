@@ -10,7 +10,7 @@
 // channel with proof of credit for the @Endpoint Verifier role!
 
 #ifndef ENDPOINT_BREAKOUTS
-#error This header should only be included in plugin-endpoints.hh
+#error This header should only be included in plugin-native.hh
 #endif
 
 // https://discord.com/developers/docs/resources/channel#get-channel
@@ -43,7 +43,7 @@ NEW_FIELD(bool, nsfw, USEDBY(payload))
 NEW_FIELD(int, rate_limit_per_user, USEDBY(payload))
 NEW_FIELD(int, bitrate, USEDBY(payload))
 NEW_FIELD(int, user_limit, USEDBY(payload))
-NEW_FIELD(std::vector<json>, permission_overwrites, USEDBY(payload))
+NEW_FIELD(std::vector<Overwrite>, permission_overwrites, USEDBY(payload))
 NEW_FIELD(Snowflake, parent_id, USEDBY(payload))
 STATIC_FIELD(std::string, method, "PATCH")
 AUTO_TARGET("/channels/{}", ARR(channel_id), )
